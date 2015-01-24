@@ -33,9 +33,9 @@
 				font-family: "微软雅黑", arial, helvetica, sans-serif;
 			}
 			.container {
-				width: 100%;
 				height: 100%;
-				overflow: hidden;
+				width: 100%;
+				overflow-x: hidden;
 			}
 			.header {
 				width: 100%;
@@ -65,9 +65,9 @@
 				margin-top: 20px;
 			}
 			.navbtn{
-				position: absolute;
-				top: 2px;
-				right: 2px;
+				position: relative;
+				top: 8px;
+				right: 10px;
 				width: 48px;
 				max-width: 12%;
 				float: right;
@@ -81,13 +81,11 @@
 				display: none;
 			}
 			.main {
-				height: 100%;
+				*height: 100%;
 				width: 100%;
 				background-color: #ccc;
 			}
 			.footer {
-				position: absolute;
-				bottom: 0px;
 				width: 100%;
 				height: 30px;
 				background-color: #333;
@@ -105,7 +103,6 @@
 				}
 				.leftnav {
 					width: 12%;
-					height: 100%;
 					float: left;
 					display: block;
 				}
@@ -121,9 +118,15 @@
 		<script>
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
+				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height()
+				$('.main').css({
+					"min-height": minht+""+"px"
+				});
+				$('.leftnav').height($('.main').height());
 				$(".navbtn").click(function (e) {
 					if( document.body.clientWidth<720){
 						if($(".leftnav").is(':hidden')){
+						$(".leftnav").css("height",200+"px");
 						$(".leftnav").show();
 						}else{
 							$(".leftnav").hide();
@@ -143,13 +146,45 @@
 					<div class="title">
 						<p>失物招领平台</p>
 					</div>
-				</div>
-				<div class="navbtn">
-					<i id="navbtn" class="fa fa-list fa-3x"></i>
+					<div class="navbtn">
+						<i id="navbtn" class="fa fa-list fa-3x"></i>
+					</div>
 				</div>
 			</div>
 			<div class="leftnav">导航区域</div>
-			<div class="main">公告区域</div>
+			<div class="main">公告区域
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			<p>ceshi</p>
+			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>
 	</body>
