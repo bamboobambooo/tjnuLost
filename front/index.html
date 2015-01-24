@@ -38,19 +38,18 @@
 				overflow-x: hidden;
 			}
 			.header {
-				width: 100%;
-				min-width: 360px;
+				width: 100%;				
 				height: 60px;
 				background-image: -webkit-linear-gradient(top,#013162,#0D4C99);
 				background-image: linear-gradient(to bottom, #013162, #0D4C99);
 			}
 			.headerwrap{
 				width: 100%;
+				min-width:248px;
 				height: 100%;
 				margin: 0 auto;
 			}
-			.header img.logo {
-				
+			.header img.logo {				
 				height: 100%;
 				background-color: red;
 				float: left;
@@ -58,7 +57,7 @@
 			.header .title {
 				float: left;
 				color: #fff;
-				width: 100px;
+				min-width: 100px;
 				height: 100%;
 			}
 			.header .title p{
@@ -67,7 +66,7 @@
 			.navbtn{
 				position: relative;
 				top: 8px;
-				right: 10px;
+				right: 15px;
 				width: 48px;
 				max-width: 12%;
 				float: right;
@@ -91,7 +90,9 @@
 				background-color: #333;
 				color:white;
 			}
-			@media all and (min-width: 720px) { /*屏幕宽度大于等于720px时   优先考虑移动设备(宽度小于720的)，然后对大屏幕进行优化   */
+			
+			/*屏幕宽度大于等于720px时优先考虑移动设备(宽度小于720的)，然后对大屏幕进行优化   */
+			@media all and (min-width: 720px) { 
 				.header .title {
 					margin-left: 10%;
 				}
@@ -113,29 +114,77 @@
 					text-align: center;
 				}
 			}
+			/*超小视口 iphone4系列 优化*/
+			@media all and (max-width: 360px) {
+				.header img.logo {
+					display:none;
+				}
+				.header .title p::before{					
+					content:"天津师范大学";
+				}
+				.header .title p:before{					
+					content:"天津师范大学";
+				}
+			}
 		</style>
 		<link rel="stylesheet" href="otherres/font-awesome-4.3.0/css/font-awesome.min.css">
-		<script>
+		<script>  
+			
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
-				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height()
-				$('.main').css({
-					"min-height": minht+""+"px"
+
+			
+				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height();
+				var navShowed = 0;//判断nav是否展开,默认为关 0
+				initSize();
+				$(".navbtn").click(function(){
+					showhideNav("click");
 				});
-				$('.leftnav').height($('.main').height());
-				$(".navbtn").click(function (e) {
+				
+				$(window).resize(function(){
+					minht = document.body.clientHeight-$('.header').height()-$('.footer').height();
+					initSize();
 					if( document.body.clientWidth<720){
-						if($(".leftnav").is(':hidden')){
-						$(".leftnav").css("height",200+"px");
-						$(".leftnav").slideDown(600);
-						$("#navbtn").css("color","#C38186");
-						}else{
-							$(".leftnav").slideUp(300,"linear");
-							$("#navbtn").css("color","#ADC1F4");
-							$('.leftnav').height($('.main').height());
-						}
-					}
+						showhideNav();
+					}else{						
+						var h = $('.main').height();
+						$('.leftnav').height(h);
+						
+					}	
+					
 				});
+				
+				function showhideNav(cc) {						
+					if( document.body.clientWidth<720){
+						if((cc=="click") && (!navShowed) && ($(".leftnav").is(':hidden'))){						
+							$(".leftnav").css("height",200+"px");
+							$(".leftnav").slideDown(600,function(){
+								navShowed = 1;
+							});
+							$("#navbtn").css("color","#C38186");
+						}else if(navShowed){
+							$(".leftnav").slideUp(300,"linear",function(){
+								navShowed = 0;
+								$("#navbtn").css("color","#ADC1F4");
+								var h = $('.main').height();
+								$('.leftnav').removeAttr("style");
+								$('.leftnav').height(h);
+							});
+							
+						}
+					}			
+				}
+				
+				function initSize(){
+					$('.main').css({
+						"min-height": minht+""+"px"
+					});
+					$('.leftnav').height($('.main').height());
+				
+				}
+			
+				
+				
 			});
 		</script>
 	</head>
