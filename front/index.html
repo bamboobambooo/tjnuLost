@@ -127,9 +127,12 @@
 					if( document.body.clientWidth<720){
 						if($(".leftnav").is(':hidden')){
 						$(".leftnav").css("height",200+"px");
-						$(".leftnav").show();
+						$(".leftnav").slideDown(600);
+						$("#navbtn").css("color","#C38186");
 						}else{
-							$(".leftnav").hide();
+							$(".leftnav").slideUp(300,"linear");
+							$("#navbtn").css("color","#ADC1F4");
+							$('.leftnav').height($('.main').height());
 						}
 					}
 				});
