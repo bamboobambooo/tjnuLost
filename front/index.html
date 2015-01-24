@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<title>天津师范大学 失物招领平台</title>
+		<script src="js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			table,
+			thead,
+			tbody,
+			tfoot,
+			tr,
+			td,
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				padding: 0;
+				margin: 0;
+				border: 0 none;
+			}
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				border: 0 none;
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑", arial, helvetica, sans-serif;
+			}
+			.container {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			.header {
+				width: 100%;
+				min-width: 375px;
+				height: 60px;
+				background-image: linear-gradient(to bottom, #013162, #0D4C99);
+			}
+			.headerwrap{
+				width: 76%;
+				height: 100%;
+				margin: 0 auto;
+			}
+			.header img.logo {
+				
+				height: 100%;
+				background-color: red;
+				float: left;
+			}
+			.header .title {
+				float: left;
+				color: #fff;
+				width: 100px;
+				height: 100%;
+			}
+			.header .title p{
+				margin-top: 20px;
+			}
+			.navbtn{
+				position: absolute;
+				top: 2px;
+				right: 2px;
+				width: 48px;
+				max-width: 12%;
+				float: right;
+			}
+			#navbtn{
+				color:#ADC1F4;
+			}
+			.leftnav{
+				width: 100%;
+				background-color: #aaa;
+				display: none;
+			}
+			.main {
+				height: 100%;
+				width: 100%;
+				background-color: #ccc;
+			}
+			.footer {
+				position: absolute;
+				bottom: 0px;
+				width: 100%;
+				height: 30px;
+				background-color: #333;
+				color:white;
+			}
+			@media screen and (min-width: 720px) { /*屏幕宽度大于等于720px时   优先考虑移动设备(宽度小于720的)，然后对大屏幕进行优化   */
+				.header .title {
+					margin-left: 10%;
+				}
+				.navbtn{
+					display: none;
+				}
+				.leftnav {
+					width: 12%;
+					height: 100%;
+					float: left;
+					display: block;
+				}
+				.main{
+					padding-left: 12%;
+				}
+				.footer{
+					text-align: center;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="otherres/font-awesome-4.3.0/css/font-awesome.min.css">
+		<script>
+			jQuery.noConflict();
+			jQuery(document).ready(function($){
+				$(".navbtn").click(function (e) {
+					if( document.body.clientWidth<720){
+						if($(".leftnav").is(':hidden')){
+						$(".leftnav").show();
+						}else{
+							$(".leftnav").hide();
+						}
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<div class="headerwrap">				
+					<img class="logo" src="img/logo.gif" />
+					
+					<div class="title">
+						<p>失物招领平台</p>
+					</div>
+				</div>
+				<div class="navbtn">
+					<i id="navbtn" class="fa fa-list fa-3x"></i>
+				</div>
+			</div>
+			<div class="leftnav">导航区域</div>
+			<div class="main">公告区域</div>
+			<div class="footer">&copy;过客小站 版权所有</div>
+		</div>
+	</body>
+
+</html>
