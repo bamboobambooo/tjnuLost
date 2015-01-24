@@ -91,29 +91,43 @@
 				color:white;
 			}
 			
-			/*屏幕宽度大于等于720px时优先考虑移动设备(宽度小于720的)，然后对大屏幕进行优化   */
-			@media all and (min-width: 720px) { 
+			/* 优先考虑移动设备，然后对大屏幕进行优化  大于等于640的 */
+			@media all and (min-width: 640px) { 
 				.header .title {
 					margin-left: 10%;
 				}
 				.headerwrap{
-					width: 76%;
+					width: 70%;/**/
 				}
 				.navbtn{
 					display: none;
 				}
 				.leftnav {
-					width: 12%;
+					width: 15%;/**/
 					float: left;
 					display: block;
 				}
 				.main{
-					padding-left: 12%;
+					padding-left: 15%;/**/
 				}
 				.footer{
 					text-align: center;
 				}
 			}
+			
+			/* 大于等于720的 宽度、间距适当改变 百分比变小 */
+			@media all and (min-width: 720px) {
+				.headerwrap{
+					width: 73%;
+				}
+				.leftnav {
+					width: 13.5%;
+				}
+				.main{
+					padding-left: 13.5%;
+				}
+			}
+			
 			/*超小视口 iphone4系列 优化*/
 			@media all and (max-width: 359px) {
 				.header img.logo {
