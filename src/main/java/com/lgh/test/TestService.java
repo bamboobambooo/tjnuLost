@@ -18,7 +18,7 @@ public class TestService {
 	public List<User> findBySome(String id,Class clazz){
 		
 		DetachedCriteria criteria=DetachedCriteria.forClass(clazz);
-		criteria.add(Restrictions.eq("id",id ));
+		criteria.add(Restrictions.eq("id",Integer.parseInt(id) ));
 		List<User> list = testDAO.findByCriteria(criteria);
 		
 		
