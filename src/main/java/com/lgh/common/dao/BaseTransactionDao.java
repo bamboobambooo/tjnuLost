@@ -9,7 +9,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.lgh.common.tools.GenericUtile;
+import com.lgh.common.tools.GenericUtil;
+/**
+ * Hibernate 3与Spring整合适用
+ * @author liugh
+ *
+ * @param <T>
+ */
 public class BaseTransactionDao<T extends Serializable> extends HibernateDaoSupport{
 	@Resource(name="sessionFactory")
 	private void setMySessionFactory(SessionFactory sessionFactory){
@@ -25,7 +31,7 @@ public class BaseTransactionDao<T extends Serializable> extends HibernateDaoSupp
 		this.entityClass = entityClass;
 	}
 	public BaseTransactionDao() {
-		Class<? extends Object> genericClass = GenericUtile.getSuperGenericClass(this.getClass());
+		Class<? extends Object> genericClass = GenericUtil.getSuperGenericClass(this.getClass());
 		this.setEntityClass(genericClass);
 	}
 	public void save(T t){
@@ -61,7 +67,7 @@ public class BaseTransactionDao<T extends Serializable> extends HibernateDaoSupp
 	 * @since  　Ver 1.1
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T>findByCriteria(DetachedCriteria criteria, int firstResult, int maxResults){
+	public List<T> findByCriteria(DetachedCriteria criteria, int firstResult, int maxResults){
 		return super.getHibernateTemplate().findByCriteria(criteria, firstResult, maxResults);
 	}
 	@SuppressWarnings("unchecked")

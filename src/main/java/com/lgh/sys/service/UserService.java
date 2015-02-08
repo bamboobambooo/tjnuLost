@@ -37,8 +37,8 @@ public class UserService {
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
 		detachedCriteria.add(Restrictions.eq("name", user.getName()));
 		detachedCriteria.add(Restrictions.eq("password", user.getPassword()));
-		detachedCriteria.add(Restrictions.eq("role", user.getRole()));
-		List list = userDao.findByCriteria(detachedCriteria);
+		@SuppressWarnings("unchecked")
+		List<User> list = userDao.findByCriteria(detachedCriteria);
 		
 		if(list.isEmpty()){
 			return false;

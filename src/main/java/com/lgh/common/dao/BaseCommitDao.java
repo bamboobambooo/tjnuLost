@@ -14,8 +14,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lgh.common.tools.GenericUtile;
+import com.lgh.common.tools.GenericUtil;
 @SuppressWarnings("unchecked")
+/**
+ * 暂时不使用此类。Hibernate4适用。
+ * @author liugh
+ *
+ * @param <T>
+ */
+@Deprecated
 public class BaseCommitDao<T extends Serializable>{
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -25,7 +32,7 @@ public class BaseCommitDao<T extends Serializable>{
 	private final String HQL_COUNT_ALL;
 	
 	public BaseCommitDao() {
-		Class<? extends Object> genericClass = GenericUtile.getSuperGenericClass(this.getClass());
+		Class<? extends Object> genericClass = GenericUtil.getSuperGenericClass(this.getClass());
 		this.setEntityClass(genericClass);
 		this.getPkname();
 		HQL_LIST_ALL="from "+this.entityClass.getSimpleName()+" order by "+pkname+" desc";

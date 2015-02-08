@@ -10,6 +10,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * current thread of execution.  Follows the Thread Local Session
  * pattern, see {@link http://hibernate.org/42.html }.
  */
+@SuppressWarnings("deprecation")
 public class HibernateSessionFactory {
 
     /** 
@@ -23,7 +24,7 @@ public class HibernateSessionFactory {
 	private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
     private static org.hibernate.SessionFactory sessionFactory;
 	
-    private static Configuration configuration = new AnnotationConfiguration();    private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
+	private static Configuration configuration = new AnnotationConfiguration();    private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
     private static String configFile = CONFIG_FILE_LOCATION;
 
 	static {

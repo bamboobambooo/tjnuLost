@@ -3,7 +3,7 @@ package com.lgh.common.tools;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public class GenericUtile {
+public class GenericUtil {
 	@SuppressWarnings("unchecked")
 	public static Class<? extends Object> getSuperGenericClass(Class<? extends Object> clazz){
 		Type genericSuperclass = clazz.getGenericSuperclass();

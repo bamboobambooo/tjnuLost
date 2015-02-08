@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import org.apache.struts2.convention.annotation.Actions;
+/*import org.apache.struts2.convention.annotation.Actions;*/
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
+/*import org.apache.struts2.convention.annotation.Results;*/
+
 
 import com.lgh.common.tools.json.JsonUtil;
 import com.lgh.sys.entity.User;
-import com.opensymphony.xwork2.Action;
 
 @Scope("prototype")
 @Controller
 @Namespace("/name")
-public class TestControl implements Action {
+public class TestControl implements com.opensymphony.xwork2.Action {
 
 	@Autowired
 	private TestService testService;
@@ -27,7 +28,8 @@ public class TestControl implements Action {
 	private User user;
 	private String name;
 
-	private List<User> List;
+	@SuppressWarnings("unused")
+	private List<User> list;
 
 	public String getName() {
 		return name;
@@ -45,22 +47,22 @@ public class TestControl implements Action {
 		this.user = user;
 	}
 
-	@org.apache.struts2.convention.annotation.Action(value = "test", results = {
+	@Action(value = "test", results = {
 			@Result(name = "success", location = "/index.jsp", type = "redirect"),
 			@Result(name = "register", location = "/haha.jsp", type = "redirect") })
 	public String test() throws Exception {
-		List = testService.findBySome("1", User.class);
+		list = testService.findBySome("1", User.class);
 		user = testService.findBySome("1", User.class).get(0);
 		name = user.getName();
 		JsonUtil.outToJson(ServletActionContext.getResponse(), user);
 		return SUCCESS;
 	}
 
-	@org.apache.struts2.convention.annotation.Action(value = "/haha/register", results = {
+	@Action(value = "/haha/register", results = {
 			@Result(name = "success", location = "/haha.jsp", type = "redirect"),
 			@Result(name = "register", location = "haha.jsp", type = "redirect") })
 	public String register() throws Exception {
-		List = testService.findBySome("1", User.class);
+		list = testService.findBySome("1", User.class);
 		user = testService.findBySome("1", User.class).get(0);
 		name = user.getName();
 		// JsonUtil.outToJson(ServletActionContext.getResponse(), user);

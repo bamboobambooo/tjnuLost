@@ -1,23 +1,37 @@
 package com.lgh.sys.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.lgh.common.entity.BaseEntity;
 
 @Entity
-@Table(name = "t_user")
-public class User extends BaseEntity implements Serializable {
+@Table(name = "t_admin")
+public class Admin extends BaseEntity implements Serializable {
 
-
-	private static final long serialVersionUID = -4344007914742190026L;
+	private static final long serialVersionUID = -868315320020670103L;
 	
+	private Department department;
 	private String name;
 	private String password;
-	private Long mobile;
+	private String mobile;
 	private String email;
+
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dep_id")
+	public Department getDepartment() {
+		return this.department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
 	@Column(name = "name", length = 32)
 	public String getName() {
@@ -38,15 +52,15 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	@Column(name = "mobile")
-	public Long getMobile() {
+	public String getMobile() {
 		return this.mobile;
 	}
 
-	public void setMobile(Long mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
-	@Column(name = "email", length = 64)
+	@Column(name = "email")
 	public String getEmail() {
 		return this.email;
 	}

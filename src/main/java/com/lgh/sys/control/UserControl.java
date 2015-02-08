@@ -22,7 +22,6 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 	private UserService userService;
 
 	private User user;
-	private String tip;
 	
 
 	public User getUser() {
@@ -33,18 +32,11 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 		this.user = user;
 	}
 	
-	public String getTip() {
-		return tip;
-	}
 
-	public void setTip(String tip) {
-		this.tip = tip;
-	}
-
-	@Action(value = "regModel", results = {
+	@Action(value = "reg", results = {
 			@Result(name = "success", location = "regSuccess.jsp", type = "redirect"),
 			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
-	public String regModel() throws Exception {
+	public String reg() throws Exception {
 		try {
 			userService.save(user);
 		} catch (Exception e) {
@@ -52,19 +44,6 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 		}
 		return SUCCESS;
 	}
-	
-	@Action(value = "regGrapher", results = {
-			@Result(name = "success", location = "regSuccess.jsp", type = "redirect"),
-			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
-	public String regGrapher() throws Exception {
-		try {
-			userService.save(user);
-		} catch (Exception e) {
-			return ERROR;
-		}
-		return SUCCESS;
-	}
-	
 	
 	@Action(value = "login", results = {
 			@Result(name = "admin", location = "loginAdmin.jsp", type = "redirect"),
@@ -72,41 +51,17 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 			@Result(name = "error", location = "loginFail.jsp", type = "redirect"),
 			@Result(name = "grapher", location = "loginGrapher.jsp", type = "redirect") })
 	public String login() throws Exception {
-		int role = user.getRole();
+		String username = user.getName();
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
-			session.setAttribute("username", user.getName());
-		try {
-			switch (role) {
-			case 0:
-				session.setAttribute("role", role);
-				return "admin";
-			case 1:
-				session.setAttribute("role", role);
-				return "model";			
-			case 2:
-				session.setAttribute("role", role);
-				return "grapher";			
-			default:
-				return "error";
-			}
-			
-			
-		} catch (Exception e) {
-			return ERROR;
-		}
-		}
+			session.setAttribute("username",username);
+		} 
 		return ERROR;
 	}
-	
-	
 
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
 }
