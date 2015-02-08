@@ -5,6 +5,7 @@
 @width360:360px;
 @width640:640px;
 @width720:720px;
+@width1440:1440px;
 table,thead,
         tbody,
         tfoot,
@@ -16,10 +17,14 @@ table,thead,
         h3,
         h4,
         h5,
-        h6 {
+        h6,ul,ol,li {
             padding: 0;
             margin: 0;
             border: 0 none;
+        }
+        ul,li{
+        	list-style: none;
+        	list-style-type: none;
         }
         html,
         body {
@@ -126,6 +131,19 @@ table,thead,
                 padding-left: 13.5%;
             }
         }
+        /* 大于等于1440的 宽度、间距适当改变 百分比变小 */
+        @media all and (min-width: @width1440 ) {
+            .headerwrap{
+                width: 73%;
+            }
+            .leftnav {
+                width: 9%;
+            }
+            .main{
+                padding-left: 9%;
+            }
+        }
+        
         
         /*超小视口 iphone4系列 优化*/
         @media all and (max-width: (@width360 - 1)) {

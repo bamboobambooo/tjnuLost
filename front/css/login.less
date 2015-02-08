@@ -1,0 +1,62 @@
+@charset "utf-8";
+@width360:360px;
+@width640:640px;
+@width720:720px;
+@width1440:1440px;
+.login-page{
+	.main{
+		@media all and (max-width: (@width640 - 1) ) {
+			background-color: #013162;
+			.info{
+				color: white;
+			}
+		}
+		.info{
+			text-align: center;
+		}
+	}
+	.login{
+		width: 80%;
+		height: 100%;
+		margin: 0 0 0 8px;
+		@media all and (max-width: (@width640 - 1) ) {
+			margin: 0 auto;
+		}
+		form{
+			width: 100%;
+			height: 100%;
+		}
+		.input-block{
+			float:left;
+			width:100%;
+			height: 40px;
+			margin-bottom: 8px;
+		}
+		.input-tip{
+			float: left;
+			height: 38px;
+		}
+		.input-text{
+			float: right;
+			width: 70%;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			height: 36px;
+			font-size: 30px;			
+			-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+			-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		}
+		/* 小于等于639的屏幕，不显示input-tip */
+		@media all and (max-width: (@width640 - 1) ) {
+				.input-tip{
+					display: none;
+				}
+				.input-text{
+					width: 100%;
+				}
+			}
+	}
+}
