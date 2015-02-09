@@ -1,4 +1,6 @@
 front/.project
 front/css/*.css
+front/template/build/.cache/
+front/template/package.json
 target/
 .settings/
