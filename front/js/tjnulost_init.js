@@ -3,6 +3,8 @@
 			jQuery(document).ready(function($){
 				var html = template('header');
 				$('.header').html(html);
+				html = template('leftnav');
+				$('.leftnav').html(html);
 
 			
 				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height();
