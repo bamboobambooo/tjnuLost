@@ -15,30 +15,19 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	/**
-	 * 
-	 * save:添加用户
-	 * 
-	 * @author 左天琪
-	 * @param user
-	 * @since  　Ver 1.1
-	 */
+	
 	public void save(User user){
 		userDao.save(user);
 	
 		}
 	
-	/**
-	 * 根据用户名和密码查询用户是否存在
-	 * @param user
-	 * @return
-	 */
+
+	@SuppressWarnings("rawtypes")
 	public boolean existUser(User user){
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
 		detachedCriteria.add(Restrictions.eq("name", user.getName()));
 		detachedCriteria.add(Restrictions.eq("password", user.getPassword()));
-		@SuppressWarnings("unchecked")
-		List<User> list = userDao.findByCriteria(detachedCriteria);
+		List list = userDao.findByCriteria(detachedCriteria);
 		
 		if(list.isEmpty()){
 			return false;
