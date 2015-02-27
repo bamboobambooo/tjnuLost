@@ -52,7 +52,14 @@
 					});
 					$('.leftnav').height($('.main').height());
 				
+					if( c = document.getElementById("subbtn")){
+						$(c).css({
+							"position":"relative",
+							"left":($(c).parent().outerWidth()-$(c).outerWidth())/2.0 + "px" 
+						});
+					}
 				}
+				
 			
 				
 				

@@ -6,3 +6,4 @@ target/
 .settings/
 
 src/main/webapp/.project
+src/main/webapp/css/*.css
