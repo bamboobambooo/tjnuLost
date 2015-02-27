@@ -4,3 +4,5 @@ front/template/build/.cache/
 front/template/package.json
 target/
 .settings/
+
+src/main/webapp/.project
