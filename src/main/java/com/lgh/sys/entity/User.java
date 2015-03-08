@@ -2,9 +2,12 @@ package com.lgh.sys.entity;
 
 
 import java.io.Serializable;
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import com.lgh.common.entity.BaseEntity;
 
 @Entity
@@ -15,8 +18,9 @@ public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = -4344007914742190026L;
 	
 	private String name;
+	private String realname;
 	private String password;
-	private Long mobile;
+	private BigInteger mobile;
 	private String email;
 
 	@Column(name = "name", length = 32)
@@ -26,6 +30,14 @@ public class User extends BaseEntity implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 
 	@Column(name = "password", length = 32)
@@ -38,11 +50,11 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	@Column(name = "mobile")
-	public Long getMobile() {
+	public BigInteger getMobile() {
 		return this.mobile;
 	}
 
-	public void setMobile(Long mobile) {
+	public void setMobile(BigInteger mobile) {
 		this.mobile = mobile;
 	}
 
