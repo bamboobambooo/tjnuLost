@@ -35,6 +35,18 @@ public class UserService {
 			return true;
 		}
 	
-		}
-		
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean existUserName(String name){
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+		detachedCriteria.add(Restrictions.eq("name", name));
+		List list = userDao.findByCriteria(detachedCriteria);
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
+	}
+		
+}

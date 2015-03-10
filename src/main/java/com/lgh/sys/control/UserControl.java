@@ -38,7 +38,11 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
 	public String reg() throws Exception {
 		try {
-			userService.save(user);
+			if(userService.existUserName(user.getName())){
+				return ERROR;
+			}else{
+				userService.save(user);
+			}
 		} catch (Exception e) {
 			return ERROR;
 		}
@@ -46,7 +50,7 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 	}
 	
 	@Action(value = "login", results = {
-			@Result(name = "admin", location = "loginAdmin.jsp", type = "redirect"),
+			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
 			@Result(name = "model", location = "loginModel.jsp", type = "redirect"),
 			@Result(name = "error", location = "loginFail.jsp", type = "redirect"),
 			@Result(name = "grapher", location = "loginGrapher.jsp", type = "redirect") })
@@ -55,6 +59,20 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
 			session.setAttribute("username",username);
+			return SUCCESS;
+		} 
+		return ERROR;
+	}
+	
+	@Action(value = "loginAdmin", results = {
+			@Result(name = "success", location = "adminCenter.jsp", type = "redirect"),
+			@Result(name = "error", location = "loginFail.jsp", type = "redirect")})
+	public String loginAdmin() throws Exception {
+		String username = user.getName();
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
+			session.setAttribute("username",username);
+			return SUCCESS;
 		} 
 		return ERROR;
 	}

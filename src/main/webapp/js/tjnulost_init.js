@@ -1,8 +1,10 @@
 			
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
-				var html = template('header');
-				$('.header').html(html);
+				if(!typeof(template) == 'undefined'){
+					var html = template('header');
+					$('.header').html(html);
+				}
 
 			
 				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height();

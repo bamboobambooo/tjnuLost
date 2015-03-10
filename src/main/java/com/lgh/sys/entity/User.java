@@ -31,7 +31,7 @@ public class User extends BaseEntity implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	//省略@Column的测试。
 	public String getRealname() {
 		return realname;
 	}
