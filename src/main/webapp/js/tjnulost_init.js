@@ -1,7 +1,7 @@
 			
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
-				if(!typeof(template) == 'undefined'){
+				if(typeof(template) != 'undefined'){
 					var html = template('header');
 					$('.header').html(html);
 				}

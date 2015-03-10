@@ -34,7 +34,7 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 	
 
 	@Action(value = "reg", results = {
-			@Result(name = "success", location = "regSuccess.jsp", type = "redirect"),
+			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
 			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
 	public String reg() throws Exception {
 		try {
@@ -71,7 +71,7 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 		String username = user.getName();
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
-			session.setAttribute("username",username);
+			session.setAttribute("curruser",user);
 			return SUCCESS;
 		} 
 		return ERROR;
