@@ -4,7 +4,6 @@ package com.lgh.sys.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -23,7 +22,6 @@ public class User extends BaseEntity implements Serializable {
 	private BigInteger mobile;
 	private String email;
 
-	@Column(name = "name", length = 32)
 	public String getName() {
 		return this.name;
 	}
@@ -31,7 +29,6 @@ public class User extends BaseEntity implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	//省略@Column的测试。
 	public String getRealname() {
 		return realname;
 	}
@@ -40,7 +37,6 @@ public class User extends BaseEntity implements Serializable {
 		this.realname = realname;
 	}
 
-	@Column(name = "password", length = 32)
 	public String getPassword() {
 		return this.password;
 	}
@@ -49,7 +45,6 @@ public class User extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "mobile")
 	public BigInteger getMobile() {
 		return this.mobile;
 	}
@@ -58,7 +53,6 @@ public class User extends BaseEntity implements Serializable {
 		this.mobile = mobile;
 	}
 
-	@Column(name = "email", length = 64)
 	public String getEmail() {
 		return this.email;
 	}

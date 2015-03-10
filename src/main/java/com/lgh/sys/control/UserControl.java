@@ -55,10 +55,10 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 			@Result(name = "error", location = "loginFail.jsp", type = "redirect"),
 			@Result(name = "grapher", location = "loginGrapher.jsp", type = "redirect") })
 	public String login() throws Exception {
-		String username = user.getName();
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
-			session.setAttribute("username",username);
+			session.removeAttribute("curruser");
+			session.setAttribute("curruser",user);
 			return SUCCESS;
 		} 
 		return ERROR;
@@ -68,7 +68,6 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 			@Result(name = "success", location = "adminCenter.jsp", type = "redirect"),
 			@Result(name = "error", location = "loginFail.jsp", type = "redirect")})
 	public String loginAdmin() throws Exception {
-		String username = user.getName();
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if(userService.existUser(user)){//根据用户名和密码和角色组合判断用户是否存在
 			session.setAttribute("curruser",user);
