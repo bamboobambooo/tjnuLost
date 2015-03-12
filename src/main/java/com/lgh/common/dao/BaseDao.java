@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.lgh.common.tools.GenericUtil;
 /**
@@ -16,7 +17,8 @@ import com.lgh.common.tools.GenericUtil;
  *
  * @param <T>
  */
-public class BaseTransactionDao<T extends Serializable> extends HibernateDaoSupport{
+@Repository
+public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 	@Resource(name="sessionFactory")
 	private void setMySessionFactory(SessionFactory sessionFactory){
 		super.setSessionFactory(sessionFactory);
@@ -30,8 +32,9 @@ public class BaseTransactionDao<T extends Serializable> extends HibernateDaoSupp
 	public void setEntityClass(Class<? extends Object> entityClass) {
 		this.entityClass = entityClass;
 	}
-	public BaseTransactionDao() {
-		Class<? extends Object> genericClass = GenericUtil.getSuperGenericClass(this.getClass());
+	public BaseDao() {
+		//Class<? extends Object> genericClass = GenericUtil.getSuperGenericClass(this.getClass());
+		Class<? extends Object> genericClass = GenericUtil.getSuperClassGenricType(this.getClass());
 		this.setEntityClass(genericClass);
 	}
 	public void save(T t){

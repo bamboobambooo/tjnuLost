@@ -9,6 +9,12 @@ import javax.persistence.Table;
 
 import com.lgh.common.entity.BaseEntity;
 
+/**
+ * User实体
+ * @author liugh
+ *
+ */
+
 @Entity
 @Table(name = "t_user")
 public class User extends BaseEntity implements Serializable {

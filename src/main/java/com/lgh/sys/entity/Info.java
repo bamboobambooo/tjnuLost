@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import com.lgh.common.entity.BaseEntity;
 
+/**
+ * 发布的信息 实体
+ * @author liugh
+ *
+ */
 @Entity
 @Table(name = "t_info")
 public class Info extends BaseEntity implements Serializable {

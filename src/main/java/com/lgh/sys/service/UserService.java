@@ -7,21 +7,16 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lgh.common.service.BaseService;
 import com.lgh.sys.dao.UserDao;
 import com.lgh.sys.entity.User;
 
 @Service
-public class UserService {
+public class UserService extends BaseService<User> {
 	@Autowired
 	private UserDao userDao;
 	
 	
-	public void save(User user){
-		userDao.save(user);
-	
-		}
-	
-
 	@SuppressWarnings("rawtypes")
 	public boolean existUser(User user){
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
