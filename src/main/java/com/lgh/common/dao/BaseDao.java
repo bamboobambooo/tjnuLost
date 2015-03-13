@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -37,6 +39,15 @@ public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 		Class<? extends Object> genericClass = GenericUtil.getSuperClassGenricType(this.getClass());
 		this.setEntityClass(genericClass);
 	}
+	
+	public Criteria createCriteria()                                
+	{                                                      
+	  //Session session = getSession();
+	  Session session = getSessionFactory().getCurrentSession();                               
+	  Criteria criteria = session.createCriteria(getEntityClass()); 
+	  return criteria;                                              
+	}                                                               
+
 	public void save(T t){
 		super.getHibernateTemplate().save(t);
 	}
@@ -53,6 +64,7 @@ public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 	public List<T> findByAll(){
 		return this.loadAll(entityClass);
 	}
+
 	@SuppressWarnings("rawtypes")
 	public List findByCriteria(DetachedCriteria criteria){
 		List list = super.getHibernateTemplate().findByCriteria(criteria);
@@ -60,13 +72,13 @@ public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 	}
 	/**
 	 * 
-	 * findByCriteria:
+	 * findByCriteria:分页查询
 	 * 
 	 * @author 刘各欢
 	 * @param criteria qbc对象
-	 * @param firstResult 第一个结果
-	 * @param maxResults 最后一个结果
-	 * @return
+	 * @param firstResult 从零开始的索引
+	 * @param maxResults 想要的结果条数
+	 * @return List<T>
 	 * @since  　Ver 1.1
 	 */
 	@SuppressWarnings("unchecked")

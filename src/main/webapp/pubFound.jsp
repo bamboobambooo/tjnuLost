@@ -37,7 +37,7 @@
 			<div class="main">
 				<div class="info">请输入找到的物品信息</div>
 				<div class="login">
-					<form action="./user/login" method="post">
+					<form action="${contextPath}/info/pubLost" method="post">
 						<label class="input-block">
 							<span class="input-tip">地点</span>
 							<input class="input-text" placeholder="请输入找到的地点" type="text" name="info.place" id="info.place" />

@@ -40,6 +40,9 @@ public abstract class BaseService<T extends Serializable> {
 	public List<T> findByAll() {
 		return this.baseDao.findByAll();
 	}
+	public List<T> findByAll(Class<? extends Object> entityClass){
+		return this.baseDao.loadAll(entityClass);
+	}
 
 	public Long findCountByAll() {
 		return this.baseDao.findCountByAll();
