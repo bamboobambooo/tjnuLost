@@ -25,6 +25,9 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private InfoService infoService;
 	private Info info;
 	
+	private Integer p = 1;//当前页码 赋默认值1 防止null
+	private Integer size = 2; //设置每页显示的信息条数 防止null
+
 	public Info getInfo() {
 		return info;
 	}
@@ -33,14 +36,21 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		this.info = info;
 	}
 	
-	private Integer p;
-	
 	public Integer getP() {
-		return p;
+			return p;
 	}
 
 	public void setP(Integer p) {
 		this.p = p;
+	}
+
+	
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
 	}
 
 	@Action(value = "pubLost", results = {
@@ -62,8 +72,9 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	@Action(value = "getLostJSON")
 	public String getLostJSON() {
 		try {
-			List<Info> infos = infoService.findByAll(Info.class);
-			System.out.println(getP());//TODO 分页
+			//List<Info> infos = infoService.findAll(Info.class);
+			int fromIndex = (p-1) * size;
+			List<Info> infos = infoService.findAllByPageAndDescOrder(Info.class, "id", fromIndex, size);
 			
 			JsonUtil.outToJson(ServletActionContext.getResponse(), infos);
 			
