@@ -74,7 +74,21 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		try {
 			//List<Info> infos = infoService.findAll(Info.class);
 			int fromIndex = (p-1) * size;
-			List<Info> infos = infoService.findAllByPageAndDescOrder(Info.class, "id", fromIndex, size);
+			List<Info> infos = infoService.findLostByPage("id", fromIndex, size);
+			
+			JsonUtil.outToJson(ServletActionContext.getResponse(), infos);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Action(value = "getFoundJSON")
+	public String getFoundJSON() {
+		try {
+			int fromIndex = (p-1) * size;
+			List<Info> infos = infoService.findFoundByPage("id", fromIndex, size);
 			
 			JsonUtil.outToJson(ServletActionContext.getResponse(), infos);
 			

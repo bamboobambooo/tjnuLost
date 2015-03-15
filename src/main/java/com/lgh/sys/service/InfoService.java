@@ -10,6 +10,11 @@ import com.lgh.common.service.BaseService;
 import com.lgh.sys.dao.InfoDao;
 import com.lgh.sys.entity.Info;
 
+/**
+ * Info失物信息和找到信息的Service类
+ * @author liugh
+ *
+ */
 @Service
 public class InfoService extends BaseService<Info> {
 	@Autowired
@@ -17,32 +22,35 @@ public class InfoService extends BaseService<Info> {
 	
 	/**
 	 * 根据status来查询信息
-	 * @param status
+	 * @param status Info的状态
+	 * @param orderPropertyName 排序的属性名
 	 * @param begin
 	 * @param size
-	 * @return
+	 * @return List<Info>
 	 */
-	public List<Info> findInfoByPageAndStatus(int status,int begin,int size){
-		return infoDao.findInfoByPageAndStatus(status,begin,size);
+	public List<Info> findInfoByPageAndStatus(short status,String orderPropertyName,int begin,int size){
+		return infoDao.findInfoByPageAndStatus(status,orderPropertyName,begin,size);
 	}
 	
 	/**
 	 * 分页查询 丢失的信息
+	 * @param orderPropertyName 排序的属性名
 	 * @param begin
 	 * @param size
-	 * @return
+	 * @return List<Info>
 	 */
-	public List<Info> findLostByPage(int begin,int size){
-		return infoDao.findInfoByPageAndStatus(2,begin,size);
+	public List<Info> findLostByPage(String orderPropertyName,int begin,int size){
+		return infoDao.findInfoByPageAndStatus(2,orderPropertyName, begin,size);
 	}
 	
 	/**
 	 * 分页查询 找到的信息
+	 * @param orderPropertyName 排序的属性名
 	 * @param begin
 	 * @param size
-	 * @return
+	 * @return List<Info>
 	 */
-	public List<Info> findFoundByPage(int begin,int size){
-		return infoDao.findInfoByPageAndStatus(-2,begin,size);
+	public List<Info> findFoundByPage(String orderPropertyName,int begin,int size){
+		return infoDao.findInfoByPageAndStatus(-2,orderPropertyName, begin,size);
 	}
 }

@@ -26,6 +26,19 @@
 						$('.main .lost').append(html);
 					}
 				});
+				$.ajax({
+					type:"get",
+					url:"./info/getFoundJSON",
+					dataType:"json",
+					success:function(data){
+						var html = "<ul>";
+						$.each(data, function(k,v) {  
+							html+="<li>"+k+"=="+v.detail+"</li>";
+						});
+						html+="</ul>";
+						$('.main .found').append(html);
+					}
+				});
 			});
 		</script>	
 	</head>
