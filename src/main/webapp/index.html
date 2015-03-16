@@ -11,6 +11,36 @@
 		<script src="js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="template/build/template.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			jQuery(document).ready(function ($) {
+				$.ajax({
+					type:"get",
+					url:"./info/getLostJSON",
+					dataType:"json",
+					success:function(data){
+						var html = "<ul>";
+						$.each(data, function(k,v) {  
+							html+="<li>"+k+"=="+v.detail+"</li>";
+						});
+						html+="</ul>";
+						$('.main .lost').append(html);
+					}
+				});
+				$.ajax({
+					type:"get",
+					url:"./info/getFoundJSON",
+					dataType:"json",
+					success:function(data){
+						var html = "<ul>";
+						$.each(data, function(k,v) {  
+							html+="<li>"+k+"=="+v.detail+"</li>";
+						});
+						html+="</ul>";
+						$('.main .found').append(html);
+					}
+				});
+			});
+		</script>	
 	</head>
 
 	<body>
@@ -28,39 +58,13 @@
 
 
 			</div>
-			<div class="main">公告区域
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
-				<p>ceshi</p>
+			<div class="main">
+				<div class="found">
+					<h2>认领</h2>
+				</div>
+				<div class="lost">
+					<h2>求助</h2>
+				</div>
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>

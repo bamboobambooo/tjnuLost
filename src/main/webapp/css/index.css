@@ -111,6 +111,12 @@ body {
   min-width: 248px;
   background-color: #ccc;
 }
+.main .found {
+  width: 100%;
+}
+.main .lost {
+  width: 100%;
+}
 .footer {
   width: 100%;
   min-width: 248px;
