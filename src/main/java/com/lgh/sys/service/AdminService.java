@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.lgh.common.service.BaseService;
 import com.lgh.sys.dao.AdminDao;
 import com.lgh.sys.entity.Admin;
-import com.lgh.sys.entity.User;
 
 /**
  * AdminService

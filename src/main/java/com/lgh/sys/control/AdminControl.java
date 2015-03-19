@@ -38,7 +38,7 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 	 * @throws Exception
 	 */
 	@Action(value = "login", results = {
-			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
+			@Result(name = "success", location = "adminCenter.jsp", type = "redirect"),
 			@Result(name = "model", location = "loginModel.jsp", type = "redirect"),
 			@Result(name = "error", location = "loginFail.jsp", type = "redirect"),
 			@Result(name = "grapher", location = "loginGrapher.jsp", type = "redirect") })

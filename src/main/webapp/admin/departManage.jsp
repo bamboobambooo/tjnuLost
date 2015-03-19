@@ -12,6 +12,24 @@
 		<script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			jQuery(document).ready(function ($) {
+				$.ajax({
+					type:"post",
+					url:"./depart/getDepartJSON",
+					dataType:"json",
+					success:function(data){
+						var html = "<ul>";
+						$.each(data, function(k,v) {  
+							html+="<li>"+k+"=="+v.name+"</li>";
+						});
+						html+="</ul>";
+						$('.main').append(html);
+					}
+				});
+				
+			});
+		</script>
 	</head>
 
 	<body>
@@ -33,8 +51,12 @@
 
 			</div>
 			<div class="main">
-				注册成功
-			</div>
+<!-- 			<table>
+				<tr>
+					<td></td>
+				</tr>
+			</table> -->
+		</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>
 	</body>

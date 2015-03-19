@@ -1,10 +1,14 @@
 package com.lgh.common.service;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +53,20 @@ public abstract class BaseService<T extends Serializable> {
 	public List<T> findAllByPage(Class<? extends Object> entityClass,int begin,int size){
 		DetachedCriteria dc = DetachedCriteria.forClass(entityClass);
 		return this.baseDao.findByCriteria(dc, begin, size);
+	}
+	
+	/**
+	 * 根据实体和属性名和条件查询实体集
+	 * @param clazz
+	 * @param orderPropertyName 排序属性名
+	 * @param begin
+	 * @param size
+	 * @param condition 查询条件
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List findAllByPageAndOrder(Class<? extends Object> clazz,String orderPropertyName,String ascOrDesc,int begin,int size,Map<String,Object>... condition){
+		return baseDao.findAllByPageAndOrder(clazz, orderPropertyName,ascOrDesc, begin, size, condition);
 	}
 	
 	public List<T> findAllByPageAndAscOrder(Class<? extends Object> entityClass,String prop,int beginIndex,int size){
