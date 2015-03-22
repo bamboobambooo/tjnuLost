@@ -15,7 +15,10 @@ public class Admin extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = -868315320020670103L;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dep_id")
 	private Department department;
+	
 	private String name;
 	private String password;
 	private String mobile;
@@ -23,8 +26,7 @@ public class Admin extends BaseEntity implements Serializable {
 
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dep_id")
+
 	public Department getDepartment() {
 		return this.department;
 	}

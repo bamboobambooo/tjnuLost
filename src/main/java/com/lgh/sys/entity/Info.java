@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import com.lgh.common.entity.BaseEntity;
 
+/**
+ * 发布的信息 实体
+ * @author liugh
+ *
+ */
 @Entity
 @Table(name = "t_info")
 public class Info extends BaseEntity implements Serializable {
@@ -16,12 +21,15 @@ public class Info extends BaseEntity implements Serializable {
 	private Short status;
 	private String place;
 	private String detail;
+	@Column(name = "pub_time")
 	private Timestamp pubTime;
+	@Column(name = "update_time")	
 	private Timestamp updateTime;
+	@Column(name = "publish_admin_id")
 	private Integer publishAdminId;
+	@Column(name = "publish_user_id")
 	private Integer publishUserId;
 
-	@Column(name = "status")
 	public Short getStatus() {
 		return this.status;
 	}
@@ -30,7 +38,6 @@ public class Info extends BaseEntity implements Serializable {
 		this.status = status;
 	}
 
-	@Column(name = "place")
 	public String getPlace() {
 		return this.place;
 	}
@@ -39,7 +46,6 @@ public class Info extends BaseEntity implements Serializable {
 		this.place = place;
 	}
 
-	@Column(name = "detail")
 	public String getDetail() {
 		return this.detail;
 	}
@@ -48,7 +54,6 @@ public class Info extends BaseEntity implements Serializable {
 		this.detail = detail;
 	}
 
-	@Column(name = "pub_time", length = 19)
 	public Timestamp getPubTime() {
 		return this.pubTime;
 	}
@@ -57,7 +62,6 @@ public class Info extends BaseEntity implements Serializable {
 		this.pubTime = pubTime;
 	}
 
-	@Column(name = "update_time", length = 19)
 	public Timestamp getUpdateTime() {
 		return this.updateTime;
 	}
@@ -66,7 +70,7 @@ public class Info extends BaseEntity implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	@Column(name = "publish_admin_id")
+
 	public Integer getPublishAdminId() {
 		return this.publishAdminId;
 	}
@@ -75,7 +79,7 @@ public class Info extends BaseEntity implements Serializable {
 		this.publishAdminId = publishAdminId;
 	}
 
-	@Column(name = "publish_user_id")
+
 	public Integer getPublishUserId() {
 		return this.publishUserId;
 	}

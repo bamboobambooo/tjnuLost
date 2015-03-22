@@ -1,10 +1,10 @@
 			
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
-				var html = template('header');
-				$('.header').html(html);
-				html = template('leftnav');
-				$('.leftnav').html(html);
+				if(typeof(template) != 'undefined'){
+					var html = template('header');
+					$('.header').html(html);
+				}
 
 			
 				var minht = document.body.clientHeight-$('.header').height()-$('.footer').height();
@@ -53,8 +53,18 @@
 						"min-height": minht+""+"px"
 					});
 					$('.leftnav').height($('.main').height());
-				
+					
+					//首页Lost和Found区域高度设定
+					$('.main .lost').css("min-height",minht/2.0+"px");
+					$('.main .found').css("min-height",minht/2.0+"px");
+					if( c = document.getElementById("subbtn")){
+						$(c).css({
+							"position":"relative",
+							"left":($(c).parent().outerWidth()-$(c).outerWidth())/2.0 + "px" 
+						});
+					}
 				}
+				
 			
 				
 				
