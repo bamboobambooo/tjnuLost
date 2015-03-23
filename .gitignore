@@ -3,6 +3,6 @@ front/css/*.css
 front/template/build/.cache/
 front/template/package.json
 target/
-
+logs/
 src/main/webapp/.project
 src/main/webapp/css/*.css
