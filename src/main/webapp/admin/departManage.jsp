@@ -12,7 +12,8 @@
 		<script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
-		<script>
+
+<script>
 			jQuery(document).ready(function ($) {
 				$.ajax({
 					type:"post",
@@ -25,10 +26,11 @@
 							html+="<td>"+v.id+"</td><td>"+v.name+"</td>"+"<td>"+"编辑"+"</td>";
 							html+="</tr>";
 						});
-						$('.main table tbody').append(html);
-		        $('.main table tbody tr').each(function(){
+						$('.main>table tbody').append(html);
+		        $('.main>table tbody tr').each(function(){
 		        	
 		        	$(this).find('td:eq(2)').click(function(){
+		        		$('#editAdmin>table tbody').empty();
 		        		var t = $(this);
 		        		$('#editAdmin').removeClass().addClass("show");
 		        		console.log(t.siblings().eq(1).text());
@@ -40,7 +42,21 @@
 		        	    data:{deptId:t.siblings().eq(0).text()+""},
 		        	    dataType:"json",
 		        	    success:function(data){
-		        	    	console.log(data);
+		                   var html = "";
+/* 		                    $.each(data, function(k,v) {  
+
+		                    }); */
+		                    
+		                    for(var c in data){
+		                    	
+                         html+="<tr>"
+                         html+="<td>"+data[c].name+"</td><td>"+data[c].realname+"</td>"+"<td>"+data[c].mobile+"</td>";
+                         html+="<td>"+data[c].email+"</td>";
+                         html+="</tr>";
+		                    }
+		                    html = html.replace(/undefined/g, "");
+		                    
+		                    $('#editAdmin>table tbody').append(html);	        	    	
 		        	    }
 		        		});
 		        		
@@ -78,8 +94,9 @@
 			</div>
 			<div class="leftnav">导航区域
 				<ul>
-					<li><a href="${contextPath}/admin/departManage.jsp">管理部门</a></li>
-					<li><a href="${contextPath}/admin.html">退出</a></li>
+          <li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
+          <li><a href="${contextPath}/admin/departManage.jsp">管理已有部门</a></li>
+          <li><a href="${contextPath}/admin.html">退出</a></li>
 
 				</ul>
 
@@ -101,6 +118,20 @@
 				</table>
         <div id="editAdmin" class="hide">
           <h2><span id="currDepart"></span>部门管理员列表</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>真实姓名</th>
+              <th>手机</th>
+              <th>邮箱</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+
         </div>
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>

@@ -64,6 +64,23 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
 		return null;
 	}
+	
+	@Action(value = "departAdd", results = {
+			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
+			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
+	public String reg() throws Exception {
+		try {
+			System.out.println(depart.getName());
+			if(departService.existDepartName(depart.getName())){
+				return ERROR;
+			}else{
+				departService.save(depart);
+			}
+		} catch (Exception e) {
+			return ERROR;
+		}
+		return SUCCESS;
+	}
 
 	@Override
 	public String execute() throws Exception {
