@@ -19,17 +19,53 @@
 					url:"./depart/getDepartJSON",
 					dataType:"json",
 					success:function(data){
-						var html = "<ul>";
+						var html = "";
 						$.each(data, function(k,v) {  
-							html+="<li>"+k+"=="+v.name+"</li>";
+							html+="<tr>"
+							html+="<td>"+v.id+"</td><td>"+v.name+"</td>"+"<td>"+"编辑"+"</td>";
+							html+="</tr>";
 						});
-						html+="</ul>";
-						$('.main').append(html);
+						$('.main table tbody').append(html);
+		        $('.main table tbody tr').each(function(){
+		        	
+		        	$(this).find('td:eq(2)').click(function(){
+		        		var t = $(this);
+		        		$('#editAdmin').removeClass().addClass("show");
+		        		console.log(t.siblings().eq(1).text());
+		        		$('#editAdmin #currDepart').text(t.siblings().eq(1).text());
+		        		
+		        		$.ajax({
+		        			type:"post",
+		        	    url:"./getAdminJSON",
+		        	    data:{deptId:t.siblings().eq(0).text()+""},
+		        	    dataType:"json",
+		        	    success:function(data){
+		        	    	console.log(data);
+		        	    }
+		        		});
+		        		
+		        		
+		          });
+		        }) 
 					}
 				});
 				
+
+				
 			});
 		</script>
+		<style>
+		  .hide{
+        display:none;
+      }
+		  .show{
+		    display:block;
+		  }
+		  #editAdmin{
+		    border:1px solid black;
+		  }
+
+		</style>
 	</head>
 
 	<body>
@@ -51,12 +87,22 @@
 
 			</div>
 			<div class="main">
-<!-- 			<table>
-				<tr>
-					<td></td>
-				</tr>
-			</table> -->
-		</div>
+				<table>
+					<thead>
+						<tr>
+							<th>部门编号</th>
+							<th>部门名称</th>
+							<th>编辑</th>
+						</tr>
+				  </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+        <div id="editAdmin" class="hide">
+          <h2><span id="currDepart"></span>部门管理员列表</h2>
+        </div>
+			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>
 	</body>

@@ -17,7 +17,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.lgh.common.tools.GenericUtil;
-import com.lgh.sys.entity.Info;
 /**
  * Hibernate 3与Spring整合适用
  * @author liugh

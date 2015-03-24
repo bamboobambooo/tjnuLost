@@ -60,7 +60,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 	public String getDepartJSON() throws Exception {
 		int fromIndex = (p - 1) * size;
 		List<Department> list = departService.findAllByPageAndOrder(
-				Department.class, "id", "desc", fromIndex, size);
+				Department.class, "id", "asc", fromIndex, size);
 		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
 		return null;
 	}

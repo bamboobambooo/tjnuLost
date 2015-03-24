@@ -1,5 +1,9 @@
 package com.lgh.sys.control;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.lgh.common.tools.json.JsonUtil;
 import com.lgh.sys.entity.Admin;
 import com.lgh.sys.service.AdminService;
 
@@ -20,7 +25,11 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 
 	@Autowired
 	private AdminService adminService;
+	private Integer p = 1;//当前页码 赋默认值1 防止null
+	private Integer size = 5; //设置每页显示的信息条数 防止null
 
+	private Integer deptId = 1;
+	
 	private Admin admin;
 	
 	public Admin getAdmin() {
@@ -32,6 +41,30 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 	}
 
 	
+	public Integer getP() {
+		return p;
+	}
+
+	public void setP(Integer p) {
+		this.p = p;
+	}
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+	public Integer getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
+	}
+
 	/**
 	 * 管理员登陆
 	 * @return
@@ -52,6 +85,26 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 			return SUCCESS;
 		} 
 		return ERROR;
+	}
+	
+	
+	/**
+	 * 获取所有管理员 按部门
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	@Action(value = "getAdminJSON")
+	public String getAdminJSON() throws Exception {
+		int fromIndex = (p - 1) * size;
+		Map<String,Object> condition = new HashMap<>();
+		condition.put("department.id", deptId);
+		
+		List<Admin> list = adminService.findAllByPageAndOrder(
+				Admin.class, "id", "asc", fromIndex, size,condition);
+		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
+		return null;
 	}
 
 	@Override
