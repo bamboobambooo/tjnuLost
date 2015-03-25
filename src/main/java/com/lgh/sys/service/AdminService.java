@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lgh.common.service.BaseService;
 import com.lgh.sys.dao.AdminDao;
 import com.lgh.sys.entity.Admin;
+import com.lgh.sys.entity.User;
 
 /**
  * AdminService
@@ -25,7 +26,7 @@ public class AdminService extends BaseService<Admin> {
 	/**
 	 * 根据用户名和密码查找管理员是否存在
 	 * @param admin
-	 * @return User/null 存在返回User，不存在返回null
+	 * @return Admin/null 存在返回Admin，不存在返回null
 	 */
 	@SuppressWarnings("rawtypes")
 	public Admin findAdmin(Admin admin){
@@ -42,6 +43,19 @@ public class AdminService extends BaseService<Admin> {
 			return null;
 		}
 	
+	}
+
+	//根据用户名来查询管理员是否存在
+	@SuppressWarnings("rawtypes")
+	public boolean existAdminName(String name) {
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+		detachedCriteria.add(Restrictions.eq("name", name));
+		List list = adminDao.findByCriteria(detachedCriteria);
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
 	}
 	
 

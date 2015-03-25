@@ -106,6 +106,23 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
 		return null;
 	}
+	
+	//添加某部门的管理员
+	@Action(value = "departAdminAdd")
+	public String departAdminAdd() throws Exception {
+		try {
+			System.out.println(admin.getName());
+			if(adminService.existAdminName(admin.getName())){
+				JsonUtil.outToJson(ServletActionContext.getResponse(), "existAdmin");
+			}else{
+				adminService.save(admin);
+				JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
+			}
+		} catch (Exception e) {
+			e.printStackTrace(ServletActionContext.getResponse().getWriter());
+		}
+		return null;
+	}
 
 	@Override
 	public String execute() throws Exception {

@@ -65,6 +65,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 		return null;
 	}
 	
+	//添加部门
 	@Action(value = "departAdd", results = {
 			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
 			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
