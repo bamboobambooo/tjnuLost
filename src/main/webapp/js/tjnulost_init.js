@@ -29,8 +29,9 @@
 				
 				function showhideNav(cc) {						
 					if( document.body.clientWidth<720){
-						if((cc=="click") && (!navShowed) && ($(".leftnav").is(':hidden'))){						
-							$(".leftnav").css("height",200+"px");
+						if((cc=="click") && (!navShowed) && ($(".leftnav").is(':hidden'))){	
+							$('.leftnav').removeAttr("style");
+							$(".leftnav").css("min-height",100+"px");
 							$(".leftnav").slideDown(600,function(){
 								navShowed = 1;
 							});
@@ -41,7 +42,7 @@
 								$("#navbtn").css("color","#ADC1F4");
 								var h = $('.main').height();
 								$('.leftnav').removeAttr("style");
-								$('.leftnav').height(h);
+								//$('.leftnav').height(h);
 							});
 							
 						}
