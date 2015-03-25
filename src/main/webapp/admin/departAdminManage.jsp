@@ -5,58 +5,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-<title>部门管理 - 天津师范大学 失物招领平台</title>
+<title>部门管理员管理 - 天津师范大学 失物招领平台</title>
 <link rel="stylesheet/less" type="text/css" href="${contextPath}/css/index.less" charset="utf-8" />
 <link rel="stylesheet" href="${contextPath}/otherres/font-awesome-4.3.0/css/font-awesome.min.css">
 <script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 <script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="${contextPath}/js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
 <script>
+var currUrl = window.location.href; 
+var currPage = 1;
+if(currUrl.indexOf("p=")>0){  
+    currPage = currUrl.substring(currUrl.indexOf("p=")+2, currUrl.length);  
+}
+var deptId = 0;
+if(currUrl.indexOf("deptId")>0){  
+	deptId = currUrl.substring(currUrl.indexOf("deptId")+7, currUrl.length);  
+}
 jQuery(document).ready(function($) {
-	
 	//获取部门列表
 	$.ajax({
 		type: "post",
-		url: "./depart/getDepartJSON",
+		url: "./getAdminJSON",
+		data:{
+			p:currPage,
+			deptId:deptId
+		},
 		dataType: "json",
 		success: function(data) {
-			var html = "";
-			$.each(data, function(k, v) {
-				html += "<tr>"
-				html += "<td>" + v.id + "</td><td>" + v.name + "</td>" + "<td>" + '<a href="./departAdminManage.jsp?deptId='+v.id +'">'+"编辑" +'</a>'+ "</td>";
-				html += "</tr>";
-			});
-			$('.main .showDepart table tbody').append(html);
-			/* $('.main .showDepart tbody tr').each(function() {
-				$(this).find('td:eq(2)').click(function() {
-					$('#editAdmin>table tbody').empty();
-					var t = $(this);
-					$('#editAdmin').removeClass().addClass("show");
-					console.log(t.siblings().eq(1).text());
-					$('#editAdmin #currDepart').text(t.siblings().eq(1).text());
-					//获取当前部门的所有管理员
-					$.ajax({
-							type: "post",
-							url: "./getAdminJSON",
-							data: {
-								deptId:t.siblings().eq(0).text() + ""
-							},
-							dataType: "json",
-							success: function(data) {
-								var html = "";
-								for (var c in data) {
-									html += "<tr>"
-									html += "<td>" + data[c].name + "</td><td>" + data[c].realname + "</td>" + "<td>" + data[c].mobile + "</td>";
-									html += "<td>" + data[c].email + "</td>";
-									html += "</tr>";
-								}
-								html = html.replace(/undefined/g,"");
-								$('#editAdmin>table tbody').append(html);
-							}
-						});
-
-				});
-			}) */
+            var html = "";
+            for (var c in data) {
+                html += "<tr>"
+                html += "<td>" + data[c].name + "</td><td>" + data[c].realname + "</td>" + "<td>" + data[c].mobile + "</td>";
+                html += "<td>" + data[c].email + "</td>";
+                html += "</tr>";
+            }
+            html = html.replace(/undefined/g,"");
+            $('#editAdmin>table tbody').append(html);
+            
 		}
 	});
 });
@@ -107,21 +92,7 @@ font-size:16px;
 
 	</div>
 	<div class="main">
-	   <div class="showDepart">
-			<table>
-				<thead>
-					<tr>
-						<th>部门编号</th>
-						<th>部门名称</th>
-						<th>编辑</th>
-					</tr>
-				</thead>
-				<tbody>
-	
-				</tbody>
-			</table>
-		</div>
-		<div id="editAdmin" class="hide">
+		<div id="editAdmin">
 			<h2>
 				<span id="currDepart"></span>部门管理员列表
 			</h2>

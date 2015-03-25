@@ -23,7 +23,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 	private DepartService departService;
 	private Department depart;
 	private Integer p = 1;//当前页码 赋默认值1 防止null
-	private Integer size = 5; //设置每页显示的信息条数 防止null
+	private Integer size = 10; //设置每页显示的信息条数 防止null
 	
 	public Department getDepart() {
 		return depart;
