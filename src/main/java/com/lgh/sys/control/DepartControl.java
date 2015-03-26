@@ -1,5 +1,6 @@
 package com.lgh.sys.control;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -66,10 +67,8 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 	}
 	
 	//添加部门
-	@Action(value = "departAdd", results = {
-			@Result(name = "success", location = "userCenter.jsp", type = "redirect"),
-			@Result(name = "error", location = "regFail.jsp", type = "redirect") })
-	public String reg() throws Exception {
+	@Action(value = "departAdd")
+	public String departAdd(){
 		try {
 			System.out.println(depart.getName());
 			if(departService.existDepartName(depart.getName())){
@@ -81,6 +80,19 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 		} catch (Exception e) {
 			return ERROR;
 		}
+		return null;
+	}
+	
+	//修改部门名称
+	@Action(value = "departNameChange")
+	public String departNameChange() throws IOException{
+		try {
+			departService.update(depart);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JsonUtil.outToJson(ServletActionContext.getResponse(), "error");
+		}   
 		return null;
 	}
 

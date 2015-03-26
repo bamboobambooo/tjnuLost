@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
-<%@ page trimDirectiveWhitespaces="true" %> 
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -24,8 +25,11 @@
 			</div>
 			<div class="leftnav">导航区域
 				<ul>
-				  <li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
+				    <%--权限控制。区分 超级管理员 与 部门发布员 --%>
+				    <c:if test="${sessionScope.curradmin.department.id == 1 }">
+				    <li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
 					<li><a href="${contextPath}/admin/departManage.jsp">管理已有部门</a></li>
+					</c:if>
 					<li><a href="${contextPath}/admin.html">退出</a></li>
 
 				</ul>

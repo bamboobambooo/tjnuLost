@@ -58,12 +58,15 @@
 					//首页Lost和Found区域高度设定
 					$('.main .lost').css("min-height",minht/2.0+"px");
 					$('.main .found').css("min-height",minht/2.0+"px");
-					if( c = document.getElementById("subbtn")){
-						$(c).css({
-							"position":"relative",
-							"left":($(c).parent().outerWidth()-$(c).outerWidth())/2.0 + "px" 
-						});
-					}
+	                if( c = $(".subbtn")){
+	                	c.each(function(){
+	                        $(this).css({
+	                            "position":"relative",
+	                            "left":($(this).parent().outerWidth()-$(this).outerWidth())/2.0 + "px" 
+	                        });	
+	                	});
+
+	                }
 				}
 				
 			

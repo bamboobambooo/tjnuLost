@@ -47,7 +47,7 @@
 							<input class="input-text" placeholder="找到了什么东西、样子……" type="text" name="info.detail" id="info.detail"/>
 						</label>
 							<input type="hidden" name="info.status" value="-2">
-						<div class="input-block"><input id="subbtn" type="submit" value="发布"/></div>
+						<div class="input-block"><input id="subbtn" class="subbtn" type="submit" value="发布"/></div>
 					</form>
 					
 					

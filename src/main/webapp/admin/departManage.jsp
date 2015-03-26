@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 			var html = "";
 			$.each(data, function(k, v) {
 				html += "<tr>"
-				html += "<td>" + v.id + "</td><td>" + v.name + "</td>" + "<td>" + '<a href="./departAdminManage.jsp?deptId='+v.id +'">'+"编辑" +'</a>'+ "</td>";
+				html += "<td>" + v.id + "</td><td>" + v.name + "</td>" + "<td>" + '<a href="./departDetailManage.jsp?deptId='+v.id +'">'+"编辑" +'</a>'+ "</td>";
 				html += "</tr>";
 			});
 			$('.main .showDepart table tbody').append(html);

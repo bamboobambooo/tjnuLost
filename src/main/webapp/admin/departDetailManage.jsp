@@ -44,16 +44,56 @@ jQuery(document).ready(function($) {
             html = html.replace(/undefined/g,"");
             $('#editAdmin>table tbody').append(html);
             
+            //部门名称修改
+            $('#departNameChangeLink').click(function(){
+            	$('#editAdmin').addClass("hide");
+            	$('#departAdminAdd').removeClass('show').addClass('hide');
+            	$('#departNameChange').removeClass("hide").addClass("show");
+            	$('#departNameChange #deptname').val(data[0].department.name);
+            	$('#departNameChange #subbtn2').click(function(){
+	            	$.ajax({
+	                    type: "post",
+	                    url: "./depart/departNameChange",
+	                    data:{
+	                    	'depart.id':deptId,
+	                    	'depart.name':$('#departNameChange #deptname').val()+""
+	                    },
+	                    dataType: "json",
+	                    success:function(data){
+	                        if(data == "success"){
+	                            $('#departNameChange').html("修改成功<br>三秒后自动刷新");
+	                        }else{
+	                            $('#departNameChange').html("修改失败,请重新添加！<br>三秒后自动刷新");
+	                        }
+                            setTimeout(function(){
+                                window.location.reload();
+                            },3000);
+	                    }
+	            	});
+            	});
+                if( c = $(".subbtn")){
+                	c.each(function(){
+                        $(this).css({
+                            "position":"relative",
+                            "left":($(this).parent().outerWidth()-$(this).outerWidth())/2.0 + "px" 
+                        });	
+                	});
+
+                }
+            });
+            
+            
 		}
 	});
 	$('#departAdminAddLink').click(function(){
 		$('#editAdmin').hide(600);
+		$('#departNameChange').removeClass('show').addClass('hide')
 		$('#departAdminAdd').removeClass('hide').addClass('show');
 		//对按钮的剧中 再次定位 与init.js有重复
-        if( c = document.getElementById("subbtn")){
-            $(c).css({
+        if( c = $(".subbtn")){
+            c.css({
                 "position":"relative",
-                "left":($(c).parent().outerWidth()-$(c).outerWidth())/2.0 + "px" 
+                "left":(c.parent().outerWidth()-c.outerWidth())/2.0 + "px" 
             });
         }
 	});
@@ -124,7 +164,7 @@ font-size:16px;
 	<div class="leftnav">
 		导航区域
 		<ul>
-		    <li><a href="${contextPath}/admin/departNameChange.jsp">修改该部门名称</a></li>
+		    <li><a href="javascript:void(0)" id="departNameChangeLink">修改该部门名称</a></li>
 			<li><a href="javascript:void(0)" id="departAdminAddLink">添加该部门发布员</a></li>
 			<li><a href="${contextPath}/admin/adminCenter.jsp">回到后台首页</a></li>
 			<li><a href="${contextPath}/admin.html">退出</a></li>
@@ -156,7 +196,7 @@ font-size:16px;
 
 		</div>
         <div class="login hide" id="departAdminAdd">
-                    <form action="./user/reg" method="post" onkeydown="if(event.keyCode==13){return false;}">
+                    <form onkeydown="if(event.keyCode==13){return false;}">
                         <label class="input-block">
                             <span class="input-tip">用户名</span>
                             <input class="input-text" placeholder="用户名" type="text" id="name" />
@@ -177,11 +217,24 @@ font-size:16px;
                             <span class="input-tip">电子信箱</span>
                             <input class="input-text" placeholder="电子信箱" type="text" id="email"/>
                         </label>                            
-                        <div class="input-block"><button id="subbtn" type="button">添加</button></div>
+                        <div class="input-block"><button id="subbtn" class="subbtn" type="button">添加</button></div>
                     </form>
                     
                     
         </div>
+        
+        <div class="login hide" id="departNameChange">
+                    <form onkeydown="if(event.keyCode==13){return false;}">
+                        <label class="input-block">
+                            <span class="input-tip">部门名称</span>
+                            <input class="input-text" placeholder="部门名称" type="text" id="deptname" />
+                        </label>
+                       
+                        <div class="input-block"><button id="subbtn2" class="subbtn" type="button">修改</button></div>
+                    </form>
+                    
+                    
+        </div>        
 	</div>
 	<div class="footer">&copy;过客小站 版权所有</div>
 </div>

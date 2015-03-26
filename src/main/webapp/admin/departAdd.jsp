@@ -70,7 +70,7 @@
               <span class="input-tip">部门名称</span>
               <input class="input-text" placeholder="部门名称" type="text" name="depart.name" id="departname" />
             </label>
-            <div class="input-block"><button id="subbtn" type="button">添加</button></div>
+            <div class="input-block"><button id="subbtn" class="subbtn" type="button">添加</button></div>
           </form>
           
           
