@@ -34,7 +34,8 @@
 
 			</div>
 			<div class="main">
-				注册成功
+				欢迎管理员${curradmin.name }<br>
+				请从 导航区域 选择功能
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>

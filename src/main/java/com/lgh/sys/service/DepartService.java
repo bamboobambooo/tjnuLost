@@ -25,7 +25,7 @@ public class DepartService extends BaseService<Department> {
 
 	@SuppressWarnings("rawtypes")
 	public boolean existDepartName(String name) {
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Department.class);
 		detachedCriteria.add(Restrictions.eq("name", name));
 		List list = departDao.findByCriteria(detachedCriteria);
 		if(list.isEmpty()){

@@ -126,6 +126,7 @@ font-size:16px;
 		<ul>
 		    <li><a href="${contextPath}/admin/departNameChange.jsp">修改该部门名称</a></li>
 			<li><a href="javascript:void(0)" id="departAdminAddLink">添加该部门发布员</a></li>
+			<li><a href="${contextPath}/admin/adminCenter.jsp">回到后台首页</a></li>
 			<li><a href="${contextPath}/admin.html">退出</a></li>
 
 		</ul>
@@ -155,7 +156,7 @@ font-size:16px;
 
 		</div>
         <div class="login hide" id="departAdminAdd">
-                    <form action="./user/reg" method="post">
+                    <form action="./user/reg" method="post" onkeydown="if(event.keyCode==13){return false;}">
                         <label class="input-block">
                             <span class="input-tip">用户名</span>
                             <input class="input-text" placeholder="用户名" type="text" id="name" />
