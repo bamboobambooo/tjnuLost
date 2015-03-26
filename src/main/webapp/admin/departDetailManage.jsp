@@ -39,10 +39,33 @@ jQuery(document).ready(function($) {
                 html += "<tr>"
                 html += "<td>" + data[c].name + "</td><td>" + data[c].realname + "</td>" + "<td>" + data[c].mobile + "</td>";
                 html += "<td>" + data[c].email + "</td>";
+                html += "<td>" + "<span data-uid=\""+data[c].id+"\">删除</span>" + "</td>";
                 html += "</tr>";
             }
             html = html.replace(/undefined/g,"");
             $('#editAdmin>table tbody').append(html);
+            
+            //删除按钮
+            $('#editAdmin td span').click(function () {
+            	var r=confirm("确定删除？");
+				if (r==true){
+				  $.ajax({
+				    type: "post",
+			        url: "./delAdmin",
+			        data:{
+			           'uid':$(this).attr("data-uid")
+			        },
+			        dataType: "json",
+			        success: function(data) {
+			        	
+			        }				  	
+				  });
+				}
+				else{
+				  
+				}
+            	console.log();
+            });
             
             //部门名称修改
             $('#departNameChangeLink').click(function(){
@@ -143,6 +166,16 @@ jQuery(document).ready(function($) {
 #editAdmin h2{
 font-size:16px;
 }
+#editAdmin td{
+text-align: center;
+}
+#editAdmin td span{
+text-decoration: underline;
+color:blue;
+font-size: 80%;
+text-align: center;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -186,7 +219,7 @@ font-size:16px;
 						<th>真实姓名</th>
 						<th>手机</th>
 						<th>邮箱</th>
-						<th>编辑</th>
+						<th>删除</th>
 					</tr>
 				</thead>
 				<tbody>

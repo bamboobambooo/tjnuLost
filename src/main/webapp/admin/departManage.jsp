@@ -99,6 +99,7 @@ font-size:16px;
 		<ul>
 			<li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
 			<li><a href="${contextPath}/admin/departManage.jsp">管理已有部门</a></li>
+			<li><a href="${contextPath}/admin/adminCenter.jsp">回到后台首页</a></li>
 			<li><a href="${contextPath}/admin.html">退出</a></li>
 
 		</ul>
