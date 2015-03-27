@@ -1,27 +1,44 @@
 package com.lgh.common.service;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Criteria;
+import javax.annotation.Resource;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lgh.common.dao.BaseDao;
+import com.lgh.common.tools.GenericUtil;
 
 @Service
 @Transactional
 public abstract class BaseService<T extends Serializable> {
 
-	//@Lazy
-	@Autowired
-	private BaseDao<T> baseDao;
+	@Resource(name="baseDao")
+	protected BaseDao<T> baseDao;
+	
+	
+	/**
+	 *  为了根据泛型直接获取到类型，在BaseService内页加入类似BaseDao的初始化块的东西
+	 * */
+	private Class<T> entityClass;
+	public Class<T> getEntityClass() {
+		return entityClass;
+	}
+	public void setEntityClass(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+	public BaseService() {
+		Class<T> genericClass = (Class<T>) GenericUtil.getSuperClassGenricType(this.getClass());
+		this.setEntityClass(genericClass);
+	}
+	
+	
 
 	public void save(T t) {
 		this.baseDao.save(t);
@@ -40,8 +57,14 @@ public abstract class BaseService<T extends Serializable> {
 	}
 
 	public T get(Serializable id) {
-		return this.baseDao.get(id);
+		//获取泛型
+		return this.baseDao.get(this.getEntityClass(), id);
 	}
+	
+	public T get(Class<T> clazz, Serializable id)
+	{                                            
+	  return this.baseDao.get(clazz, id); 
+	}                                            
 
 	public List<T> findAll() {
 		return this.baseDao.findByAll();

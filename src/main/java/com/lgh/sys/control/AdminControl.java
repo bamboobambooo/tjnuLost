@@ -1,5 +1,6 @@
 package com.lgh.sys.control;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,12 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.lgh.common.tools.json.JsonUtil;
 import com.lgh.sys.entity.Admin;
 import com.lgh.sys.service.AdminService;
 
-@Scope("prototype")
 @Controller
 @Namespace("/admin")
 public class AdminControl implements com.opensymphony.xwork2.Action {
@@ -29,6 +28,8 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 	private Integer size = 5; //设置每页显示的信息条数 防止null
 
 	private Integer deptId = 1;
+	//delAdmin获取uid
+	private Integer uid = 0;
 	
 	private Admin admin;
 	
@@ -63,6 +64,14 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
+	}
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 
 	/**
@@ -111,13 +120,25 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 	@Action(value = "departAdminAdd")
 	public String departAdminAdd() throws Exception {
 		try {
-			System.out.println(admin.getName());
 			if(adminService.existAdminName(admin.getName())){
 				JsonUtil.outToJson(ServletActionContext.getResponse(), "existAdmin");
 			}else{
 				adminService.save(admin);
 				JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
 			}
+		} catch (Exception e) {
+			e.printStackTrace(ServletActionContext.getResponse().getWriter());
+		}
+		return null;
+	}
+	
+	@Action(value="delAdmin")
+	public String delAdmin() throws IOException{
+		try {
+			System.out.println(uid);
+			Admin tmpAdmin = adminService.get(uid.intValue());
+			adminService.delete(tmpAdmin);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
 		} catch (Exception e) {
 			e.printStackTrace(ServletActionContext.getResponse().getWriter());
 		}

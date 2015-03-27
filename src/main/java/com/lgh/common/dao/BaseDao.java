@@ -13,6 +13,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -23,24 +25,36 @@ import com.lgh.common.tools.GenericUtil;
  *
  * @param <T>
  */
+@Lazy
 @Repository
+@Scope("prototype")
 public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 	@Resource(name="sessionFactory")
 	private void setMySessionFactory(SessionFactory sessionFactory){
 		super.setSessionFactory(sessionFactory);
 	}
 	
-	private Class<? extends Object> entityClass;
+	//private Class<? extends Object> entityClass;
+	private Class<T> entityClass;
 	
-	public Class<? extends Object> getEntityClass() {
+	/*public Class<? extends Object> getEntityClass() {
+		return entityClass;
+	}*/
+	public Class<T> getEntityClass() {
 		return entityClass;
 	}
-	public void setEntityClass(Class<? extends Object> entityClass) {
+	/*public void setEntityClass(Class<? extends Object> entityClass) {
+		this.entityClass = entityClass;
+	}*/
+	public void setEntityClass(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 	public BaseDao() {
 		//Class<? extends Object> genericClass = GenericUtil.getSuperGenericClass(this.getClass());
-		Class<? extends Object> genericClass = GenericUtil.getSuperClassGenricType(this.getClass());
+		/*Class<? extends Object> genericClass = GenericUtil.getSuperClassGenricType(this.getClass());
+		this.setEntityClass(genericClass);*/
+		@SuppressWarnings("unchecked")
+		Class<T> genericClass = (Class<T>) GenericUtil.getSuperClassGenricType(this.getClass());
 		this.setEntityClass(genericClass);
 	}
 	
@@ -61,6 +75,9 @@ public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 		return (T) super.getHibernateTemplate().get(this.getEntityClass(), id);
 	}
 	
+	public T get(Class<T> clazz, Serializable id) {
+		return super.getHibernateTemplate().get(clazz, id);
+	}                                                        
 	@SuppressWarnings("unchecked")
 	public List<T> loadAll(Class<? extends Object> entityClass){
 		return (List<T>) super.getHibernateTemplate().loadAll(entityClass);

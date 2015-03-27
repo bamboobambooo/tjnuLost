@@ -57,7 +57,13 @@ jQuery(document).ready(function($) {
 			        },
 			        dataType: "json",
 			        success: function(data) {
-			        	
+			        	 if(data == "success"){
+			        		 alert("删除成功");
+			        		 window.location.reload();
+			        	 }else{
+			        		 alert("删除失败，请重试");
+			        	 }
+			        	 
 			        }				  	
 				  });
 				}
@@ -215,7 +221,7 @@ cursor:pointer;
 			<table>
 				<thead>
 					<tr>
-						<th>姓名</th>
+						<th>用户名</th>
 						<th>真实姓名</th>
 						<th>手机</th>
 						<th>邮箱</th>
