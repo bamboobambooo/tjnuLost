@@ -30,6 +30,12 @@
 				    <li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
 					<li><a href="${contextPath}/admin/departManage.jsp">管理已有部门</a></li>
 					</c:if>
+					
+					<c:if test="${sessionScope.curradmin.department.id > 1 }">
+	                <li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
+	                <li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>	
+	                </c:if>				
+					
 					<li><a href="${contextPath}/admin.html">退出</a></li>
 
 				</ul>
