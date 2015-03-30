@@ -57,7 +57,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	@Action(value = "getDepartJSON", results = { @Result(name = "success", location = "aa.jsp", type = "redirect") })
+	@Action(value = "getDepartJSON")
 	public String getDepartJSON() throws Exception {
 		int fromIndex = (p - 1) * size;
 		List<Department> list = departService.findAllByPageAndOrder(

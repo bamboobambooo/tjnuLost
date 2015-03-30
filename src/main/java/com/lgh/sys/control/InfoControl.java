@@ -24,10 +24,11 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 
 	@Autowired
 	private InfoService infoService;
-	private Info info;
+	private Info info; //发布信息  从数据库查到信息注入页面  共用
 	
 	private Integer p = 1;//当前页码 赋默认值1 防止null
-	private Integer size = 2; //设置每页显示的信息条数 防止null
+	private Integer size = 5; //设置每页显示的信息条数 防止null
+	private Integer id = 1; //设置当前现实的信息id
 
 	public Info getInfo() {
 		return info;
@@ -52,6 +53,14 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 
 	public void setSize(Integer size) {
 		this.size = size;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Action(value = "pubLost", results = {
@@ -106,6 +115,20 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Action(value = "showInfo", results = {
+			@Result(name = "success", location = "showInfo.jsp"),
+			@Result(name = "error", location = "error.jsp") })
+	public String showInfo() {
+		try {
+			info = infoService.get(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+			
+		}
+		return SUCCESS;
 	}
 	
 	

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2015-03-30 18:48:25
+Date: 2015-03-30 23:08:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,18 +75,21 @@ CREATE TABLE `t_info` (
   `publish_admin_id` int(11) DEFAULT NULL,
   `publish_user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_info
 -- ----------------------------
-INSERT INTO `t_info` VALUES ('1', '2', 'sdasad', null, 'dsasd', null, null, null, '0');
-INSERT INTO `t_info` VALUES ('2', '2', '11', null, '11', null, null, null, '0');
+INSERT INTO `t_info` VALUES ('1', '2', 'sdasad', null, 'dsasd', null, null, null, '1');
+INSERT INTO `t_info` VALUES ('2', '2', '11', null, '11', null, null, null, '1');
 INSERT INTO `t_info` VALUES ('3', '2', '123', null, '123', null, null, null, '5');
 INSERT INTO `t_info` VALUES ('4', '2', '00', null, '00', null, null, null, '5');
 INSERT INTO `t_info` VALUES ('5', '-2', '测试', null, '测试', null, null, null, '5');
 INSERT INTO `t_info` VALUES ('6', '-2', '啊哈', null, '啊哈', null, null, null, '5');
 INSERT INTO `t_info` VALUES ('7', '2', '劝学楼, 书包', null, '蓝色的！萌萌的！', null, null, null, '5');
+INSERT INTO `t_info` VALUES ('8', '-2', 'aa, aa', null, 'aaa', null, null, '1', null);
+INSERT INTO `t_info` VALUES ('9', '-2', '劝学楼', '港币', '港币港币', null, null, '1', null);
+INSERT INTO `t_info` VALUES ('10', '-2', '玻璃楼', '水杯', '圆圆的 高高的', null, null, null, '5');
 
 -- ----------------------------
 -- Table structure for t_user

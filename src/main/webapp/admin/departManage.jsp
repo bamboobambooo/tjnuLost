@@ -12,6 +12,46 @@
 <script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="${contextPath}/js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
 <script>
+	var currUrl = window.location.href;
+	var currUrlNoPage = currUrl.replace(/[&,\?]p=(\d)*/g,"");
+	var currIdIndex = currUrl.indexOf("id");//获取Url中id的索引
+	var currId = "";
+	var currPage = 1;//当前页
+	if(currUrl.indexOf("p=")>0){
+	    currPage = currUrl.substring(currUrl.indexOf("p=")+2, currUrl.length);//默认了p=在最后
+	}
+	var size = 3;
+jQuery(document).ready(function($) {
+	 /**
+	 *下方分页按钮实现
+	 **/
+
+	 
+	 var afterHtml = "";
+	 afterHtml += "<a class=\"nextpage\" href=\""+currUrlNoPage;
+	 if(currUrlNoPage.indexOf("?")>=0){
+	 	afterHtml += "&p="+(+currPage+1);
+	 }else{
+	 	afterHtml += "?p="+(+currPage+1);
+	 }
+	 afterHtml += "\">下一页</a>";
+	 
+	 var beforeHtml = "";
+	 if(currPage > 1){ //上一页
+		 beforeHtml += "<a class=\"prevpage\" href=\""+currUrlNoPage;
+		 if(currUrlNoPage.indexOf("?")>=0){
+		 	beforeHtml += "&p="+(currPage-1);
+		 }else{
+		 	beforeHtml += "?p="+(currPage-1);
+		 }
+		 beforeHtml += "\">上一页</a>";
+	 }
+	 
+	 
+	 $(".pager").html(beforeHtml + afterHtml);
+});
+</script>
+<script>
 jQuery(document).ready(function($) {
 	
 	//获取部门列表
@@ -19,44 +59,21 @@ jQuery(document).ready(function($) {
 		type: "post",
 		url: "./depart/getDepartJSON",
 		dataType: "json",
+		data:{p:currPage,size:size},
 		success: function(data) {
 			var html = "";
 			$.each(data, function(k, v) {
 				html += "<tr>"
-				html += "<td>" + v.id + "</td><td>" + v.name + "</td>" + "<td>" + '<a href="./departDetailManage.jsp?deptId='+v.id +'">'+"编辑" +'</a>'+ "</td>";
+				html += "<td>" + v.id + "</td><td>" + v.name + "</td>" + "<td>" + '<a href="./departDetailManage.jsp?deptId='+v.id +'" target="_blank">'+"编辑" +'</a>'+ "</td>";
 				html += "</tr>";
 			});
 			$('.main .showDepart table tbody').append(html);
-			/* $('.main .showDepart tbody tr').each(function() {
-				$(this).find('td:eq(2)').click(function() {
-					$('#editAdmin>table tbody').empty();
-					var t = $(this);
-					$('#editAdmin').removeClass().addClass("show");
-					console.log(t.siblings().eq(1).text());
-					$('#editAdmin #currDepart').text(t.siblings().eq(1).text());
-					//获取当前部门的所有管理员
-					$.ajax({
-							type: "post",
-							url: "./getAdminJSON",
-							data: {
-								deptId:t.siblings().eq(0).text() + ""
-							},
-							dataType: "json",
-							success: function(data) {
-								var html = "";
-								for (var c in data) {
-									html += "<tr>"
-									html += "<td>" + data[c].name + "</td><td>" + data[c].realname + "</td>" + "<td>" + data[c].mobile + "</td>";
-									html += "<td>" + data[c].email + "</td>";
-									html += "</tr>";
-								}
-								html = html.replace(/undefined/g,"");
-								$('#editAdmin>table tbody').append(html);
-							}
-						});
-
-				});
-			}) */
+			if($('.main .showDepart table tbody tr').length < size){
+				$(".prevpage").hide();
+			}
+            if($('.main .showDepart table tbody tr').length <= 0){
+                $(".pager").html('没有了 <a href="javascript:history.go(-1)">后退</a>');
+            }
 		}
 	});
 });
@@ -122,26 +139,7 @@ font-size:16px;
 				</tbody>
 			</table>
 		</div>
-		<div id="editAdmin" class="hide">
-			<h2>
-				<span id="currDepart"></span>部门管理员列表
-			</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>姓名</th>
-						<th>真实姓名</th>
-						<th>手机</th>
-						<th>邮箱</th>
-						<th>编辑</th>
-					</tr>
-				</thead>
-				<tbody>
-
-				</tbody>
-			</table>
-
-		</div>
+        <div class="pager"></div>
 	</div>
 	<div class="footer">&copy;过客小站 版权所有</div>
 </div>
