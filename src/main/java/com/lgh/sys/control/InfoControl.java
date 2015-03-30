@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.lgh.common.tools.json.JsonUtil;
+import com.lgh.sys.entity.Admin;
 import com.lgh.sys.entity.Info;
 import com.lgh.sys.entity.User;
 import com.lgh.sys.service.InfoService;
@@ -58,8 +59,17 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 			@Result(name = "error", location = "pubError.jsp", type = "redirect") })
 	public String pubLost() {
 		try {
-			User curruser = (User) ServletActionContext.getRequest().getSession().getAttribute("curruser");
-			info.setPublishUserId(curruser.getId());
+			User curruser = null;
+			Admin curradmin = null;
+			if(ServletActionContext.getRequest().getSession().getAttribute("curruser")!=null){
+				curruser = (User) ServletActionContext.getRequest().getSession().getAttribute("curruser");
+				info.setPublishUser(curruser);
+			}
+			else if(ServletActionContext.getRequest().getSession().getAttribute("curradmin")!=null){
+				curradmin = (Admin) ServletActionContext.getRequest().getSession().getAttribute("curradmin");
+				info.setPublishAdmin(curradmin);
+			}
+			
 			infoService.save(info);
 		} catch (Exception e) {
 			e.printStackTrace();
