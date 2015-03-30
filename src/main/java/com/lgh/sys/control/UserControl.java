@@ -66,6 +66,7 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 		tmpUser = userService.findUser(user);
 		if( tmpUser != null){//根据用户名和密码和角色组合判断用户是否存在
 			session.removeAttribute("curruser");
+			session.removeAttribute("curradmin");
 			session.setAttribute("curruser",tmpUser);
 			return SUCCESS;
 		} 

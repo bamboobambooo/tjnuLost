@@ -90,6 +90,7 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 		tmpAdmin = adminService.findAdmin(admin);
 		if( tmpAdmin != null){//根据用户名和密码和角色组合判断用户是否存在
 			session.removeAttribute("curradmin");
+			session.removeAttribute("curruser");
 			session.setAttribute("curradmin",tmpAdmin);
 			return SUCCESS;
 		} 

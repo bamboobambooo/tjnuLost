@@ -44,7 +44,7 @@
 						</label>
 						<label class="input-block">
                             <span class="input-tip">物品</span>
-                            <input class="input-text" placeholder="丢了什么东西" type="text" name="info.place" id="info.item" />
+                            <input class="input-text" placeholder="丢了什么东西" type="text" name="info.item" id="info.item" />
                         </label>
 						<label class="input-block input-detail">
 							<span class="input-tip">详情</span>
