@@ -2,9 +2,16 @@ package com.lgh.sys.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import com.lgh.common.entity.BaseEntity;
 
 /**
@@ -26,10 +33,18 @@ public class Info extends BaseEntity implements Serializable {
 	private Timestamp pubTime;
 	@Column(name = "update_time")	
 	private Timestamp updateTime;
+	/*
 	@Column(name = "publish_admin_id")
 	private Integer publishAdminId;
+	*/
+
+	private Admin publishAdmin;
+	/*
 	@Column(name = "publish_user_id")
 	private Integer publishUserId;
+	*/
+
+	private User publishUser;
 
 	public Short getStatus() {
 		return this.status;
@@ -78,8 +93,34 @@ public class Info extends BaseEntity implements Serializable {
 	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
+	@Access(AccessType.PROPERTY)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "publish_admin_id")
+	public Admin getPublishAdmin() {
+		if(this.publishAdmin!=null){
+			this.publishAdmin.setPassword(null);
+		}
+		return publishAdmin;
+	}
 
+	public void setPublishAdmin(Admin publishAdmin) {
+		this.publishAdmin = publishAdmin;
+	}
+	@Access(AccessType.PROPERTY)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "publish_user_id")
+	public User getPublishUser() {
+		if(this.publishUser!=null){
+			this.publishUser.setPassword(null);
+		}
+		return publishUser;
+	}
 
+	public void setPublishUser(User publishUser) {
+		this.publishUser = publishUser;
+	}
+
+	/*
 	public Integer getPublishAdminId() {
 		return this.publishAdminId;
 	}
@@ -96,5 +137,6 @@ public class Info extends BaseEntity implements Serializable {
 	public void setPublishUserId(Integer publishUserId) {
 		this.publishUserId = publishUserId;
 	}
+	*/
 
 }

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 
 public class JsonUtil {
@@ -18,7 +19,7 @@ public class JsonUtil {
 		        
 		        
 		         String s = "";
-		         s =  JSON.toJSONString(data);
+		         s =  JSON.toJSONString(data,SerializerFeature.DisableCircularReferenceDetect);//SerializerFeature.WriteMapNullValue,SerializerFeature.WriteNullStringAsEmpty);
 		         
 		         
 		        out.print(s);
