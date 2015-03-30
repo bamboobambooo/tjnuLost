@@ -92,6 +92,19 @@ public abstract class BaseService<T extends Serializable> {
 		return baseDao.findAllByPageAndOrder(clazz, orderPropertyName,ascOrDesc, begin, size, condition);
 	}
 	
+	/**
+	 * 根据泛型推断实体 和 属性名 和 条件 查询实体集
+	 * @param orderPropertyName 排序属性名
+	 * @param begin
+	 * @param size
+	 * @param condition 查询条件
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List findAllByPageAndOrder(String orderPropertyName,String ascOrDesc,int begin,int size,Map<String,Object>... condition){
+		return baseDao.findAllByPageAndOrder(this.getEntityClass(), orderPropertyName,ascOrDesc, begin, size, condition);
+	}
+	
 	public List<T> findAllByPageAndAscOrder(Class<? extends Object> entityClass,String prop,int beginIndex,int size){
 		DetachedCriteria dc = DetachedCriteria.forClass(entityClass);
 		dc.addOrder(Order.asc(prop));

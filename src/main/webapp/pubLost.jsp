@@ -43,8 +43,13 @@
 							<input class="input-text" placeholder="请输入丢失的地点" type="text" name="info.place" id="info.place" />
 						</label>
 						<label class="input-block">
+                            <span class="input-tip">物品</span>
+                            <input class="input-text" placeholder="丢了什么东西" type="text" name="info.place" id="info.item" />
+                        </label>
+						<label class="input-block input-detail">
 							<span class="input-tip">详情</span>
-							<input class="input-text" placeholder="丢了什么东西、样子……" type="text" name="info.detail" id="info.detail"/>
+							<!-- <input class="input-text" placeholder="找到了什么东西、样子……" type="text" name="info.detail" id="info.detail"/> -->
+                            <textarea class="input-text input-detail" placeholder="找到了什么东西、样子……" name="info.detail" id="info.detail"></textarea>
 						</label>
 							<input type="hidden" name="info.status" value="2">
 						<div class="input-block"><input id="subbtn" type="submit" class="subbtn" value="发布"/></div>

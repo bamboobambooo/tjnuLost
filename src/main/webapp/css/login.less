@@ -89,6 +89,13 @@
 			}
 			
 		}
+		.input-detail{
+			min-height:100px;
+			height: 100px;
+			overflow-y: visible;
+			padding: 1px 0 1px 0;
+			resize: none;
+		}
 		/* 小于等于639的屏幕，不显示input-tip */
 		@media all and (max-width: (@width640 - 1) ) {
 			.input-tip{
@@ -97,6 +104,9 @@
 			.input-text{
 				width: 100%;
 				text-align: center;
+			}
+			.input-detail{
+				text-align: left;
 			}
 			&::-webkit-input-placeholder{
 				text-align: center;

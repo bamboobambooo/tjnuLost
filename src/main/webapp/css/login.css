@@ -10,21 +10,27 @@
 .login-page .main .info {
   text-align: center;
 }
-.login-page .login {
+.login {
   width: 80%;
   height: 100%;
   margin: 0 0 0 8px;
 }
 @media all and (max-width: 639px) {
-  .login-page .login {
+  .login {
     margin: 0 auto;
   }
 }
-.login-page .login form {
+@media all and (min-width: 720px) {
+  .login {
+    margin: 0 auto;
+  }
+}
+.login form {
   width: 100%;
   height: 100%;
 }
-.login-page .login form #subbtn {
+.login form #subbtn,
+.login form .subbtn {
   width: 66px;
   height: 39px;
   position: relative;
@@ -34,24 +40,25 @@
   font-family: "微软雅黑", arial, helvetica, sans-serif;
   display: inline-block;
 }
-.login-page .login .input-block {
+.login .input-block {
   float: left;
   width: 100%;
   height: 40px;
   margin-bottom: 8px;
 }
-.login-page .login .input-tip {
+.login .input-tip {
   float: left;
   height: 38px;
   font-size: 30px;
 }
-.login-page .login .input-text {
+.login .input-text {
   float: right;
   width: 70%;
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 36px;
   font-size: 25px;
+  font-family: "微软雅黑", arial, helvetica, sans-serif;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -59,45 +66,55 @@
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 /* 输入框内placeholder样式自定义 */
-.login-page .login .input-text::-webkit-input-placeholder {
+.login .input-text::-webkit-input-placeholder {
   color: grey;
   font-family: "微软雅黑", arial, helvetica, sans-serif;
   font-size: 70%;
 }
-.login-page .login .input-text:-ms-input-placeholder {
+.login .input-text:-ms-input-placeholder {
   color: grey;
   font-family: "微软雅黑", arial, helvetica, sans-serif;
   font-size: 70%;
 }
-.login-page .login .input-text:-moz-placeholder {
+.login .input-text:-moz-placeholder {
   color: grey;
   font-family: "微软雅黑", arial, helvetica, sans-serif;
   font-size: 70%;
 }
-.login-page .login .input-text::-moz-placeholder {
+.login .input-text::-moz-placeholder {
   color: grey;
   font-family: "微软雅黑", arial, helvetica, sans-serif;
   font-size: 70%;
+}
+.login .input-detail {
+  min-height: 100px;
+  height: 100px;
+  overflow-y: visible;
+  padding: 1px 0 1px 0;
+  resize: none;
 }
 /* 小于等于639的屏幕，不显示input-tip */
 @media all and (max-width: 639px) {
-  .login-page .login .input-tip {
+  .login .input-tip {
     display: none;
   }
-  .login-page .login .input-text {
+  .login .input-text {
     width: 100%;
     text-align: center;
   }
-  .login-page .login::-webkit-input-placeholder {
+  .login .input-detail {
+    text-align: left;
+  }
+  .login::-webkit-input-placeholder {
     text-align: center;
   }
-  .login-page .login:-ms-input-placeholder {
+  .login:-ms-input-placeholder {
     text-align: center;
   }
-  .login-page .login:-moz-placeholder {
+  .login:-moz-placeholder {
     text-align: center;
   }
-  .login-page .login::-moz-placeholder {
+  .login::-moz-placeholder {
     text-align: center;
   }
 }

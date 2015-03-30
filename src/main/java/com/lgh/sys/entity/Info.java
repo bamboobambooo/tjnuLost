@@ -20,6 +20,7 @@ public class Info extends BaseEntity implements Serializable {
 	
 	private Short status;
 	private String place;
+	private String item;
 	private String detail;
 	@Column(name = "pub_time")
 	private Timestamp pubTime;
@@ -44,6 +45,14 @@ public class Info extends BaseEntity implements Serializable {
 
 	public void setPlace(String place) {
 		this.place = place;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 
 	public String getDetail() {
