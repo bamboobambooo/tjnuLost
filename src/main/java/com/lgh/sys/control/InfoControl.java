@@ -1,6 +1,7 @@
 package com.lgh.sys.control;
 
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,7 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private Integer p = 1;//当前页码 赋默认值1 防止null
 	private Integer size = 8; //设置每页显示的信息条数 防止null
 	private Integer id = 1; //设置当前现实的信息id
+	private String status;
 
 	public Info getInfo() {
 		return info;
@@ -64,6 +66,14 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Action(value = "pubLost", results = {
@@ -163,6 +173,19 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 			
 		}
 		return SUCCESS;
+	}
+	
+	@Action(value = "changeInfoStatus")
+	public String changeInfoStatus() throws IOException {
+		try {
+			info = infoService.get(id);
+			info.setStatus(Short.parseShort(status));
+			infoService.update(info);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
+		} catch (Exception e) {
+			e.printStackTrace(ServletActionContext.getResponse().getWriter());
+		}
+		return null;
 	}
 	
 	

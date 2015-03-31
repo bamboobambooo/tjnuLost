@@ -15,12 +15,46 @@
 		<script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function ($) {
+				
+				if(${info.status} == 2 ){
+					$('#oplost').attr("selected","selected");
+				}else if(${info.status} == -2){
+					$('#opfound').attr("selected","selected");
+				}else if(${info.status} == 0){
+					$('#opclose').attr("selected","selected");
+				}
+				
+				$('#infoStatus').change(function () {
+					$.ajax({
+					type: "post",
+					url: "${contextPath}/info/changeInfoStatus",
+					data:{
+						id:${info.id},
+						status:$('#infoStatus').val()+"",
+					},
+					dataType: "json",
+					success: function(data) {
+						if(data == "success"){
+							alert("状态改变成功");
+							window.location.reload(); 
+							
+						}else{
+							alert("状态改变失败");
+						}
+					}
+				    });
+				});
+			});
+		</script>
 	</head>
 
 	<body class="login-page">
 		<div class="container">
 			<div class="header">
-				<div class="headerwrap"> <a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
+				<div class="headerwrap"> 
+				<a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
 					<div class="title"> <p>失物招领平台</p> </div> 
 					<div class="navbtn"> <i id="navbtn" class="fa fa-list fa-3x"></i> </div> 
 				</div>
@@ -31,12 +65,27 @@
 			<h2>
 			<c:if test="${info.publishAdmin != null }">${info.publishAdmin.department.name}</c:if>
 			<c:if test="${info.publishUser != null }">${info.publishUser.name}</c:if>
-			在 ${info.place} 发现了 ${info.item}</h2>
+			在 ${info.place}&nbsp;<c:if test="${info.status == 2 }">丢失了&nbsp;</c:if>
+            <c:if test="${info.status == -2 }">找到了&nbsp;</c:if> ${info.item}</h2>
+			当前状态：
+			<select name="infoStatus" id="infoStatus"
+			    <c:choose>
+                    <c:when test="${(info.publishAdmin == sessionScope.curradmin) || (info.publishUser == sessionScope.curruser)}">
+                    </c:when>
+                    <c:otherwise> 
+                        disabled="disabled"
+                    </c:otherwise>
+                </c:choose>
+			>
+				<option value="2" id="oplost" >丢失中</option>
+				<option value="-2" id="opfound">待物主领走</option>
+				<option value="0" id="opclose">已归还/已找到</option>
+			</select><br />
 			详情如下：<br/>
 			${info.detail }
-			<%-- <s:property value="info.detail"></s:property> --%>
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
+
 		</div>
 	</body>
 

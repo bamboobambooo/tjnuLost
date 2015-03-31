@@ -27,7 +27,7 @@
 								html += v.publishUser.name + "";
 							}
 							
-							html += " 在 "+v.place+" 丢失了 "+'<a href="./showInfo?id='+v.id+'">'+ v.item+"</a></li>";
+							html += " 在 "+v.place+" 丢失了 "+'<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
 						});
 						html+="</ul>";
 						$('.main .lost').append(html);
