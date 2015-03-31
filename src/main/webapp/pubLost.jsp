@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="${contextPath}/otherres/font-awesome-4.3.0/css/font-awesome.min.css">
 		<script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${contextPath}/js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${contextPath}/js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body class="login-page">

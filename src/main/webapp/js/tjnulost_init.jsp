@@ -1,3 +1,8 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page trimDirectiveWhitespaces="true" %> 
+
 			/**
 			 *下方分页预定义常量
 			 **/
@@ -84,7 +89,9 @@
 	                }
 				}
 				
-			
+				$('.header .title p').click(function(){
+					window.location.href = "${contextPath}/index.html";
+				});
 				
 				
 			});

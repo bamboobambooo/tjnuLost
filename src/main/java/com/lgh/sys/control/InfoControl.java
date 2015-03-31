@@ -1,7 +1,10 @@
 package com.lgh.sys.control;
 
 
+import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -27,7 +30,7 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private Info info; //发布信息  从数据库查到信息注入页面  共用
 	
 	private Integer p = 1;//当前页码 赋默认值1 防止null
-	private Integer size = 5; //设置每页显示的信息条数 防止null
+	private Integer size = 8; //设置每页显示的信息条数 防止null
 	private Integer id = 1; //设置当前现实的信息id
 
 	public Info getInfo() {
@@ -88,6 +91,7 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		return SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Action(value = "getLostJSON")
 	public String getLostJSON() {
 		try {
@@ -95,7 +99,21 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 			int fromIndex = (p-1) * size;
 			List<Info> infos = infoService.findLostByPage("id", fromIndex, size);
 			
-			JsonUtil.outToJson(ServletActionContext.getResponse(), infos);
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("status", Short.parseShort("2"));
+			
+			BigInteger total = infoService.countAllByPageAndOrder(Info.class, "id", "asc",condition);
+			Integer pages ;
+			if(total.intValue() % size == 0){
+				pages = total.intValue()/size;
+			}else{
+				pages = total.intValue()/size+1;
+			}
+			Map<String,Object> map = new HashMap<>();
+			map.put("result", infos);
+			map.put("total", total);
+			map.put("pages", pages);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), map);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,13 +121,29 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Action(value = "getFoundJSON")
 	public String getFoundJSON() {
 		try {
 			int fromIndex = (p-1) * size;
 			List<Info> infos = infoService.findFoundByPage("id", fromIndex, size);
 			
-			JsonUtil.outToJson(ServletActionContext.getResponse(), infos);
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("status", Short.parseShort("-2"));
+			
+			BigInteger total = infoService.countAllByPageAndOrder(Info.class, "id", "asc",condition);
+			Integer pages ;
+			if(total.intValue() % size == 0){
+				pages = total.intValue()/size;
+			}else{
+				pages = total.intValue()/size+1;
+			}
+			
+			Map<String,Object> map = new HashMap<>();
+			map.put("result", infos);
+			map.put("total", total);
+			map.put("pages", pages);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), map);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

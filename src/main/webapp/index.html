@@ -10,7 +10,7 @@
 		<script src="js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="template/build/template.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/tjnulost_init.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
 		<script>
 			jQuery(document).ready(function ($) {
 				$.ajax({
@@ -19,7 +19,7 @@
 					dataType:"json",
 					success:function(data){
 						var html = "<ul>";
-						$.each(data, function(k,v) {
+						$.each(data.result, function(k,v) {
 							html+="<li>";
 							if(v.publishAdmin != undefined){
 								html += v.publishAdmin.department.name + "";
@@ -39,7 +39,7 @@
 					dataType:"json",
 					success:function(data){
 						var html = "<ul>";
-                        $.each(data, function(k,v) {
+                        $.each(data.result, function(k,v) {
                             html+="<li>";
                             if(v.publishAdmin != undefined){
                                 html += v.publishAdmin.department.name + "";
@@ -74,10 +74,10 @@
 			</div>
 			<div class="main">
 				<div class="found">
-					<h2>认领</h2>
+					<h2><a href="./info/showFound.jsp">认领</a></h2>
 				</div>
 				<div class="lost">
-					<h2>求助</h2>
+					<h2><a href="./info/showLost.jsp">求助</a></h2>
 				</div>
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
