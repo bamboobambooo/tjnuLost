@@ -1,6 +1,7 @@
 package com.lgh.sys.control;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import com.lgh.common.tools.json.JsonUtil;
 import com.lgh.sys.entity.Admin;
+import com.lgh.sys.entity.Department;
 import com.lgh.sys.service.AdminService;
 
 @Controller
@@ -110,10 +112,22 @@ public class AdminControl implements com.opensymphony.xwork2.Action {
 		int fromIndex = (p - 1) * size;
 		Map<String,Object> condition = new HashMap<>();
 		condition.put("department.id", deptId);
-		
+		BigInteger total = adminService.countAllByPageAndOrder(Admin.class, "id", "asc",condition);
+		Integer pages ;
+		if(total.intValue() % size == 0){
+			pages = total.intValue()/size;
+		}else{
+			pages = total.intValue()/size+1;
+		}
 		List<Admin> list = adminService.findAllByPageAndOrder(
 				Admin.class, "id", "asc", fromIndex, size,condition);
-		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("result", list);
+		map.put("total", total);
+		map.put("pages", pages);
+		
+		JsonUtil.outToJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
 	
