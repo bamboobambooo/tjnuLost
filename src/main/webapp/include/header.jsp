@@ -6,7 +6,7 @@
          <a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif">
          </a>
          <div class="title">
-             <p>失物招领平台</p>
+             <p>艾滋科普系统</p>
          </div>
          <div class="navbtn">
              <i id="navbtn" class="fa fa-list fa-3x"></i>

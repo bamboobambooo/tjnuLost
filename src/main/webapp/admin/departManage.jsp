@@ -167,19 +167,7 @@ font-size:16px;
 
 <body>
 <div class="container">
-	<div class="header">
-		<div class="headerwrap">
-			<a href="${contextPath}/index.html"> <img class="logo"
-				src="${contextPath}/img/logo.gif">
-			</a>
-			<div class="title">
-				<p>失物招领平台</p>
-			</div>
-			<div class="navbtn">
-				<i id="navbtn" class="fa fa-list fa-3x"></i>
-			</div>
-		</div>
-	</div>
+	<%@ include file="/include/header.jsp" %>
 	<div class="leftnav">
 		导航区域
 		<ul>
@@ -210,7 +198,7 @@ font-size:16px;
 		</div>
         <div class="pager"></div>
 	</div>
-	<div class="footer">&copy;过客小站 版权所有</div>
+	<div class="footer">&copy;myj 版权所有</div>
 </div>
 </body>
 

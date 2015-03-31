@@ -17,12 +17,7 @@
 
 	<body>
 		<div class="container">
-			<div class="header">
-				<div class="headerwrap"> <a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
-					<div class="title"> <p>失物招领平台</p> </div> 
-					<div class="navbtn"> <i id="navbtn" class="fa fa-list fa-3x"></i> </div> 
-				</div>
-			</div>
+			<%@ include file="/include/header.jsp" %>
 			<div class="leftnav">导航区域
 				<ul>
 				    <%--权限控制。区分 超级管理员 与 部门发布员 --%>
@@ -32,8 +27,8 @@
 					</c:if>
 					
 					<c:if test="${sessionScope.curradmin.department.id > 1 }">
-	                <li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
-	                <li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>	
+	                <li><a href="${contextPath}/pubFound.jsp">发布公告信息</a></li>
+	                <%-- <li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>	--%>
 	                </c:if>				
 					
 					<li><a href="${contextPath}/admin.html">退出</a></li>
@@ -47,7 +42,7 @@
 				欢迎管理员${curradmin.name }<br>
 				请从 导航区域 选择功能
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;myj 版权所有</div>
 		</div>
 	</body>
 

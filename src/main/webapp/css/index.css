@@ -72,6 +72,7 @@ body {
 }
 .header .title p {
   margin-top: 20px;
+  cursor: pointer;
 }
 .headerwrap {
   width: 100%;
@@ -110,6 +111,9 @@ body {
   width: 100%;
   min-width: 248px;
   background-color: #ccc;
+}
+.main h2 a:link {
+  text-decoration: none;
 }
 .main .found {
   width: 100%;
@@ -180,10 +184,10 @@ body {
     display: none;
   }
   .header .title p::before {
-    content: "天津师范大学";
+    content: "艾奇公司";
   }
   .header .title p:before {
-    content: "天津师范大学";
+    content: "艾奇公司";
   }
 }
 /*# sourceMappingURL=index.css.map */

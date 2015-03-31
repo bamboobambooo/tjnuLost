@@ -50,41 +50,24 @@
 		</script>
 	</head>
 
-	<body class="login-page">
+	<body>
 		<div class="container">
-			<div class="header">
-				<div class="headerwrap"> 
-				<a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
-					<div class="title"> <p>失物招领平台</p> </div> 
-					<div class="navbtn"> <i id="navbtn" class="fa fa-list fa-3x"></i> </div> 
-				</div>
-			</div>
-
+			<%@ include file="/include/header.jsp" %>
 			<%@ include file="/include/leftnav.jsp"%>
 			<div class="main">
 			<h2>
-			<c:if test="${info.publishAdmin != null }">${info.publishAdmin.department.name}</c:if>
-			<c:if test="${info.publishUser != null }">${info.publishUser.name}</c:if>
-			在 ${info.place}&nbsp;<c:if test="${info.status == 2 }">丢失了&nbsp;</c:if>
-            <c:if test="${info.status == -2 }">找到了&nbsp;</c:if> ${info.item}</h2>
-			当前状态：
-			<select name="infoStatus" id="infoStatus"
-			    <c:choose>
-                    <c:when test="${(info.publishAdmin == sessionScope.curradmin) || (info.publishUser == sessionScope.curruser)}">
-                    </c:when>
-                    <c:otherwise> 
-                        disabled="disabled"
-                    </c:otherwise>
-                </c:choose>
-			>
-				<option value="2" id="oplost" >丢失中</option>
-				<option value="-2" id="opfound">待物主领走</option>
-				<option value="0" id="opclose">已归还/已找到</option>
-			</select><br />
-			详情如下：<br/>
+			 ${info.place}
+           </h2>
+            <c:if test="${info.publishAdmin != null }">${info.publishAdmin.department.name} 部门</c:if>
+            <c:if test="${info.publishUser != null }">${info.publishUser.name} 用户</c:if>
+                        发布<br/>
+            
+            <c:if test="${info.pubTime != null }"> 创建于${info.pubTime}</c:if>
+            <c:if test="${info.updateTime != null }"> 更新于${info.updateTime}</c:if><br/>
+			文章如下：<br/>
 			${info.detail }
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;myj 版权所有</div>
 
 		</div>
 	</body>

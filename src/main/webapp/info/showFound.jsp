@@ -105,7 +105,7 @@
                                 html += v.publishUser.name + "";
                             }
                             
-                            html += " 在 "+v.place+" 发现了 "+'<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
+                            html += " 发表了 "+'<a href="${contextPath}/info/showInfo?id='+v.id+'">'+v.place+"</a></li>";
                         });
 						html+="</ul>";
 						$('.main h2').after(html);
@@ -118,21 +118,11 @@
 	<body>
 		<div class="container">
             <%@ include file="/include/header.jsp" %>
-			<div class="leftnav">导航区域
-				<ul>
-					<li><a href="../register.html">用户注册</a></li>
-					<li><a href="../login.html">用户登陆</a></li>
-					<li><a href="../admin.html">管理员登陆</a></li>
-
-				</ul>
-
-
-
-			</div>
+			<%@ include file="/include/leftnav.jsp"%>
 			<div class="main">
-					<h2>认领</h2>
+					<h2>公告信息</h2>
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;myj 版权所有</div>
 		</div>
 	</body>
 
