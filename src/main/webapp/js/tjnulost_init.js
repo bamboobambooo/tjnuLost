@@ -1,4 +1,19 @@
-			
+			/**
+			 *下方分页预定义常量
+			 **/
+			 var currUrl = window.location.href;
+			 var currPage = 1;//当前页
+			 var currUrlNoPage = currUrl.replace(/[&,\?]p=(\d)*/g,"");
+			 if(currUrl.indexOf("p=")>0){
+			     currPage = currUrl.substring(currUrl.indexOf("p=")+2, currUrl.length);
+			 }
+			 
+			 var ppp = "";
+			 if(currUrlNoPage.indexOf("?")>=0){
+			     ppp = "&p=";
+			  }else{
+			     ppp += "?p=";
+			  }
 			jQuery.noConflict();
 			jQuery(document).ready(function($){
 				if(typeof(template) != 'undefined'){

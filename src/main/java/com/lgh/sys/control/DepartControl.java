@@ -1,12 +1,14 @@
 package com.lgh.sys.control;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -62,7 +64,18 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 		int fromIndex = (p - 1) * size;
 		List<Department> list = departService.findAllByPageAndOrder(
 				Department.class, "id", "asc", fromIndex, size);
-		JsonUtil.outToJson(ServletActionContext.getResponse(), list);
+		BigInteger total = departService.countAllByPageAndOrder(Department.class, "id", "asc");
+		Integer pages ;
+		if(total.intValue() % size == 0){
+			pages = total.intValue()/size;
+		}else{
+			pages = total.intValue()/size+1;
+		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("result", list);
+		map.put("total", total);
+		map.put("pages", pages);
+		JsonUtil.outToJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
 	

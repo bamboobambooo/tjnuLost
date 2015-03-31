@@ -1,6 +1,7 @@
 package com.lgh.common.dao;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -138,6 +140,41 @@ public class BaseDao<T extends Serializable> extends HibernateDaoSupport{
 		c.setFirstResult(begin);
 		c.setMaxResults(size);		
 		return c.list();
+	}
+	
+	/**
+	 * 获取结果总条数
+	 * @param clazz
+	 * @param orderPropertyName
+	 * @param ascOrDesc
+	 * @param begin
+	 * @param size
+	 * @param condition
+	 * @return BigInteger
+	 */
+	@SuppressWarnings("unchecked")
+	public BigInteger countAllByPageAndOrder(Class<? extends Object> clazz,String orderPropertyName,String ascOrDesc,Map<String,Object>... condition){
+		Criteria criteria = super.getSessionFactory().getCurrentSession().createCriteria(clazz);
+		if (condition.length > 0) {
+			for (Map<String, Object> map : condition) {
+				Iterator<String> it = map.keySet().iterator();
+				while (it.hasNext()) {
+					String en = it.next();
+					criteria.add(Restrictions.eq(en, map.get(en)));
+				}
+			}
+		}
+		if("asc".equals(ascOrDesc)){
+			criteria.addOrder(Order.asc(orderPropertyName));
+		}else if("desc".equals(ascOrDesc)){
+			criteria.addOrder(Order.desc(orderPropertyName));
+		}
+		
+		criteria.setProjection(Projections.rowCount());
+		String str= "";
+		str = criteria.uniqueResult().toString();
+		return BigInteger.valueOf(Long.valueOf(str));
+		
 	}
 	
 	

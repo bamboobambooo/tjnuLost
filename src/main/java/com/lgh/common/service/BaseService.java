@@ -1,6 +1,7 @@
 package com.lgh.common.service;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +106,16 @@ public abstract class BaseService<T extends Serializable> {
 		return baseDao.findAllByPageAndOrder(this.getEntityClass(), orderPropertyName,ascOrDesc, begin, size, condition);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public BigInteger countAllByPageAndOrder(Class<? extends Object> clazz,String orderPropertyName,String ascOrDesc,Map<String,Object>... condition){
+		return baseDao.countAllByPageAndOrder(clazz, orderPropertyName, ascOrDesc,condition);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BigInteger countAllByPageAndOrder(String orderPropertyName,String ascOrDesc,Map<String,Object>... condition){
+		return baseDao.countAllByPageAndOrder(this.getEntityClass(), orderPropertyName, ascOrDesc,condition);
+	}
+	
 	public List<T> findAllByPageAndAscOrder(Class<? extends Object> entityClass,String prop,int beginIndex,int size){
 		DetachedCriteria dc = DetachedCriteria.forClass(entityClass);
 		dc.addOrder(Order.asc(prop));
@@ -116,6 +127,8 @@ public abstract class BaseService<T extends Serializable> {
 		dc.addOrder(Order.desc(prop));
 		return this.baseDao.findByCriteria(dc, beginIndex, size);
 	}
+	
+	
 
 	public Long findCountByAll() {
 		return this.baseDao.findCountByAll();
