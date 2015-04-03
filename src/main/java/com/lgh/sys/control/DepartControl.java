@@ -81,7 +81,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 	
 	//添加部门
 	@Action(value = "departAdd")
-	public String departAdd(){
+	public String departAdd() throws IOException{
 		try {
 			System.out.println(depart.getName());
 			if(departService.existDepartName(depart.getName())){
@@ -91,7 +91,7 @@ public class DepartControl implements com.opensymphony.xwork2.Action {
 				JsonUtil.outToJson(ServletActionContext.getResponse(), "success");
 			}
 		} catch (Exception e) {
-			return ERROR;
+			JsonUtil.outToJson(ServletActionContext.getResponse(), "error");
 		}
 		return null;
 	}

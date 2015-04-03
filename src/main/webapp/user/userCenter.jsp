@@ -1,5 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %> 
+<%
+//未登录禁止查看此页
+if(session.getAttribute("curruser")==null){
+	response.sendRedirect("../login.html");
+}
+%>
 <!DOCTYPE html>
 <html>
 
@@ -26,6 +32,8 @@
 				<ul>
 					<li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
 					<li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>
+					<li><a href="${contextPath}/user/personalInfo">个人信息修改</a></li>
+					<li><a href="${contextPath}/user/logout">退出</a></li>
 					<li><a href="${contextPath}/admin.html">管理员登陆</a></li>
 
 				</ul>
@@ -34,7 +42,7 @@
 
 			</div>
 			<div class="main">
-				注册成功
+				欢迎登陆个人中心！
 			</div>
 			<div class="footer">&copy;过客小站 版权所有</div>
 		</div>
