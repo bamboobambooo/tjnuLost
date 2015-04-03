@@ -18,6 +18,15 @@
 
 				
 				$('#subbtn').click(function () {
+					console.log($('#user\\.password').val())
+					console.log($('#user\\.repassword').val())
+					if($('#user\\.password').val() != $('#user\\.repassword').val()){
+						alert("请确认您的密码是否输入一致！");
+                        return;
+					}else{
+						
+					}
+					
 					//遍历input 获取user
 					var user = {};
 					$('input').each(function(){
@@ -79,6 +88,10 @@
 						<label class="input-block">
 							<span class="input-tip">密码</span>
 							<input class="input-text" placeholder="密码" type="password" value="${user.password}" name="user.password" id="user.password"/>
+						</label>
+						<label class="input-block">
+							<span class="input-tip">密码确认</span>
+							<input class="input-text" placeholder="再次输入密码" type="password" name="user.repassword" id="user.repassword"/>
 						</label>
 						<label class="input-block">
 							<span class="input-tip">真实姓名</span>
