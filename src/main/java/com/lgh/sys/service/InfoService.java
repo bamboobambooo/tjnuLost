@@ -1,11 +1,14 @@
 package com.lgh.sys.service;
 
 
+import java.io.File;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lgh.common.CommonInfo;
 import com.lgh.common.service.BaseService;
 import com.lgh.sys.dao.InfoDao;
 import com.lgh.sys.entity.Info;
@@ -53,4 +56,46 @@ public class InfoService extends BaseService<Info> {
 	public List<Info> findFoundByPage(String orderPropertyName,int begin,int size){
 		return infoDao.findInfoByPageAndStatus(-2,orderPropertyName, begin,size);
 	}
+	
+    /**
+     * 
+     * uploadImg:上传图片并返回一些参数
+     * 
+     * @author 刘各欢
+     * @param pic
+     * @param req
+     * @return
+     * @since 　Ver 1.1
+     */
+    public String uploadImg(File pic,String uploadFileName){
+		//从CommonInfo中读取上传文件的路径
+		String pathString = CommonInfo.imgPath+"/infoimg/";
+		String fileName = "";
+		
+		//判断文件是否已经被获取到
+		if (pic.length() > 0) {
+			//user.setImage(pathString + pic.getOriginalFilename());
+			//判断文件存储路径是否存在
+			File tmp = new File(pathString);
+
+			if (!tmp.exists() && !tmp.isDirectory()) {
+				tmp.mkdirs();
+			}
+			try {
+				String ext=uploadFileName.substring(uploadFileName.lastIndexOf(".")+1,uploadFileName.length());
+				fileName = System.currentTimeMillis()+"."+ext;
+				File fileNew = new File(pathString+fileName);
+				FileUtils.copyFile(pic, fileNew);
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else{
+			return "error";//未获取到文件
+		}
+		return fileName;
+	}
+	
 }

@@ -84,7 +84,7 @@
 			详情如下：<br/>
 			${info.detail }
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;刘各欢 版权所有</div>
 
 		</div>
 	</body>

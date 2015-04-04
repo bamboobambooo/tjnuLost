@@ -33,7 +33,7 @@
                             发布失败
                             三秒后自动返回
 			</div>
-			<div class="footer">&copy;myj 版权所有</div>
+			<div class="footer">&copy;刘各欢 版权所有</div>
 
 		</div>
 	</body>

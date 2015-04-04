@@ -1,6 +1,7 @@
 package com.lgh.sys.control;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -34,48 +35,15 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private Integer size = 8; //设置每页显示的信息条数 防止null
 	private Integer id = 1; //设置当前现实的信息id
 	private String status;
+	private File imgFile;
+	private String imgFileContentType; // 文件的内容类型  image/jpeg
+	private String imgFileFileName; // 上传文件名  比附abc.jpg
 
-	public Info getInfo() {
-		return info;
-	}
 
-	public void setInfo(Info info) {
-		this.info = info;
-	}
-	
-	public Integer getP() {
-			return p;
-	}
-
-	public void setP(Integer p) {
-		this.p = p;
-	}
-
-	
-	public Integer getSize() {
-		return size;
-	}
-
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+	/**
+	 * 发布丢失了 或 找到的东西的信息
+	 * @return
+	 */
 	@Action(value = "pubLost", results = {
 			@Result(name = "success", location = "pubSuccess.jsp", type = "redirect"),
 			@Result(name = "error", location = "pubError.jsp", type = "redirect") })
@@ -91,6 +59,8 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 				curradmin = (Admin) ServletActionContext.getRequest().getSession().getAttribute("curradmin");
 				info.setPublishAdmin(curradmin);
 			}
+			String imgURL = infoService.uploadImg(imgFile, imgFileFileName);
+			info.setImgurl(imgURL);
 			
 			infoService.save(info);
 		} catch (Exception e) {
@@ -188,12 +158,75 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		return null;
 	}
 	
-	
-
-	
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Info getInfo() {
+		return info;
+	}
+
+	public void setInfo(Info info) {
+		this.info = info;
+	}
+	
+	public Integer getP() {
+			return p;
+	}
+
+	public void setP(Integer p) {
+		this.p = p;
+	}
+
+	
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public File getImgFile() {
+		return imgFile;
+	}
+
+	public void setImgFile(File imgFile) {
+		this.imgFile = imgFile;
+	}
+
+	public String getImgFileContentType() {
+		return imgFileContentType;
+	}
+
+	public void setImgFileContentType(String imgFileContentType) {
+		this.imgFileContentType = imgFileContentType;
+	}
+
+	public String getImgFileFileName() {
+		return imgFileFileName;
+	}
+
+	public void setImgFileFileName(String imgFileFileName) {
+		this.imgFileFileName = imgFileFileName;
+	}
+
 }

@@ -37,7 +37,7 @@
 			<div class="main">
 				<div class="info">请输入找到的物品信息</div>
 				<div class="login">
-					<form action="${contextPath}/info/pubLost" method="post">
+					<form action="${contextPath}/info/pubLost" method="post" enctype="multipart/form-data">
 						<label class="input-block">
 							<span class="input-tip">地点</span>
 							<input class="input-text" placeholder="请输入找到的地点" type="text" name="info.place" id="info.place" />
@@ -45,7 +45,11 @@
                         <label class="input-block">
                             <span class="input-tip">物品</span>
                             <input class="input-text" placeholder="丢了什么东西" type="text" name="info.item" id="info.item" />
-                        </label>						
+                        </label>	
+                        <label class="input-block">
+                            <span class="input-tip">图片</span>
+                            <input class="input-text" placeholder="上传个图片吧" type="file" name="imgFile" id="imgFile" />
+                        </label>                        
 						<label class="input-block input-detail">
 							<span class="input-tip">详情</span>
 							<!-- <input class="input-text" placeholder="找到了什么东西、样子……" type="text" name="info.detail" id="info.detail"/> -->

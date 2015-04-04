@@ -130,7 +130,7 @@
 			<div class="main">
 					<h2>求助</h2>
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;刘各欢 版权所有</div>
 		</div>
 	</body>
 
