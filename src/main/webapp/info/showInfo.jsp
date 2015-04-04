@@ -46,6 +46,11 @@
 					}
 				    });
 				});
+				
+				
+				
+				
+				
 			});
 		</script>
 	</head>
@@ -88,8 +93,10 @@
 				<option value="-2" id="opfound">待物主领走</option>
 				<option value="0" id="opclose">已归还/已找到</option>
 			</select><br />
-			<div id="showImg">${info.publishAdmin.id} ${sessionScope.curradmin.id}  ${info.publishUser.id}${sessionScope.curruser.id}
-			 <c:if test='${info.imgurl !="" }'>找到了&nbsp;</c:if>
+			<div id="showImg">
+			 <c:if test='${info.imgurl !="" }'>
+			     <img src="${contextPath}/../infoimg/${info.imgurl}" alt="" style="width:100px;height:100px" />
+			 </c:if>
 			</div>
 			详情如下：<br/>
 			${info.detail }
