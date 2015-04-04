@@ -18,22 +18,12 @@
 	<body class="login-page">
 		<div class="container">
 			<div class="header">
-				<div class="headerwrap"> <a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
+				<div class="headerwrap"> <a href="${contextPath}/index.jsp"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
 					<div class="title"> <p>失物招领平台</p> </div> 
 					<div class="navbtn"> <i id="navbtn" class="fa fa-list fa-3x"></i> </div> 
 				</div>
 			</div>
-			<div class="leftnav">导航区域
-				<ul>
-					<li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
-					<li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>
-					<li><a href="${contextPath}/admin.html">管理员登陆</a></li>
-
-				</ul>
-
-
-
-			</div>
+			<%@ include file="/include/leftnav.jsp"%>
 			<div class="main">
 				<div class="info">请输入找到的物品信息</div>
 				<div class="login">

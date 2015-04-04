@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <div class="header">
      <div class="headerwrap">
-         <a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif">
+         <a href="${contextPath}/index.jsp"> <img class="logo" src="${contextPath}/img/logo.gif">
          </a>
          <div class="title">
              <p>失物招领平台</p>

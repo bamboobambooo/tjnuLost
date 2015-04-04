@@ -90,7 +90,7 @@
 				}
 				
 				$('.header .title p').click(function(){
-					window.location.href = "${contextPath}/index.html";
+					window.location.href = "${contextPath}/index.jsp";
 				});
 				
 				

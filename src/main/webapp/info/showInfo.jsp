@@ -54,7 +54,7 @@
 		<div class="container">
 			<div class="header">
 				<div class="headerwrap"> 
-				<a href="${contextPath}/index.html"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
+				<a href="${contextPath}/index.jsp"> <img class="logo" src="${contextPath}/img/logo.gif"> </a> 
 					<div class="title"> <p>失物招领平台</p> </div> 
 					<div class="navbtn"> <i id="navbtn" class="fa fa-list fa-3x"></i> </div> 
 				</div>
@@ -69,18 +69,28 @@
             <c:if test="${info.status == -2 }">找到了&nbsp;</c:if> ${info.item}</h2>
 			当前状态：
 			<select name="infoStatus" id="infoStatus"
-			    <c:choose>
-                    <c:when test="${(info.publishAdmin == sessionScope.curradmin) || (info.publishUser == sessionScope.curruser)}">
-                    </c:when>
-                    <c:otherwise> 
-                        disabled="disabled"
-                    </c:otherwise>
-                </c:choose>
+			
+                <c:if test="${sessionScope.curradmin.id != null}">
+	                    <c:if test="${info.publishAdmin.id != sessionScope.curradmin.id}">
+	                    disabled="disabled"
+	                    </c:if>
+                </c:if>
+                <c:if test="${sessionScope.curruser.id != null}">
+                        <c:if test="${  info.publishUser.id != sessionScope.curruser.id}">
+                            disabled="disabled"
+                        </c:if>
+                </c:if>
+                <c:if test="${sessionScope.curradmin.id == null and sessionScope.curruser.id == null}">
+                            disabled="disabled"
+                </c:if>                
 			>
 				<option value="2" id="oplost" >丢失中</option>
 				<option value="-2" id="opfound">待物主领走</option>
 				<option value="0" id="opclose">已归还/已找到</option>
 			</select><br />
+			<div id="showImg">${info.publishAdmin.id} ${sessionScope.curradmin.id}  ${info.publishUser.id}${sessionScope.curruser.id}
+			 <c:if test='${info.imgurl !="" }'>找到了&nbsp;</c:if>
+			</div>
 			详情如下：<br/>
 			${info.detail }
 			</div>

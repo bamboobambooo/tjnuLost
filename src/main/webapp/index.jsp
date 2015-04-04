@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %> 
 <!DOCTYPE html>
 <html>
 
@@ -61,17 +63,7 @@
 		<div class="container">
 			<div class="header">
 			</div>
-			<div class="leftnav">导航区域
-				<ul>
-					<li><a href="./register.html">用户注册</a></li>
-					<li><a href="./login.html">用户登陆</a></li>
-					<li><a href="./admin.html">管理员登陆</a></li>
-
-				</ul>
-
-
-
-			</div>
+			<%@ include file="/include/leftnav.jsp"%>
 			<div class="main">
 				<div class="found">
 					<h2><a href="./info/showFound.jsp">认领</a></h2>

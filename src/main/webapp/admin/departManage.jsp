@@ -169,7 +169,7 @@ font-size:16px;
 <div class="container">
 	<div class="header">
 		<div class="headerwrap">
-			<a href="${contextPath}/index.html"> <img class="logo"
+			<a href="${contextPath}/index.jsp"> <img class="logo"
 				src="${contextPath}/img/logo.gif">
 			</a>
 			<div class="title">
