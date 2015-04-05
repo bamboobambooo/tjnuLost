@@ -17,7 +17,7 @@
 		<script>
 			jQuery(document).ready(function ($) {
 				$.ajax({
-					type:"get",
+					type:"post",
                     url:"./getLostJSON",
                     data:{
                         p:currPage,

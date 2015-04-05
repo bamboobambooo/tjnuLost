@@ -7,6 +7,8 @@
             <c:when test="${sessionScope.curruser != null }">  
 		        <li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
 		        <li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>
+	            <li><a href="${contextPath}/info/showInfoListByUser.jsp?uid=${sessionScope.curruser.id}&status=-2">自己发布的找到信息</a></li>
+                <li><a href="${contextPath}/info/showInfoListByUser.jsp?uid=${sessionScope.curruser.id}&status=2">自己发布的丢失信息</a></li>
                 <li><a href="${contextPath}/user/personalInfo">修改个人信息</a></li>
                 <li><a href="${contextPath}/user/userCenter.jsp">回到个人中心</a></li>
                 <li><a href="${contextPath}/user/logout">退出</a></li>		        
@@ -16,8 +18,20 @@
                 <li><a href="${contextPath}/login.html">用户登陆</a></li>
 		         <c:choose>  
 		            <c:when test="${sessionScope.curradmin != null }">
-		              <li><a href="${contextPath}/admin/adminCenter.jsp">管理员中心</a></li>
-		              <li><a href="${contextPath}/user/logout">退出</a></li>
+	                    <%--权限控制。区分 超级管理员 与 部门发布员 --%>
+	                    <c:if test="${sessionScope.curradmin.department.id == 1 }">
+	                    <li><a href="${contextPath}/admin/departAdd.jsp">添加新部门</a></li>
+	                    <li><a href="${contextPath}/admin/departManage.jsp">管理已有部门</a></li>
+	                    </c:if>
+	                    
+	                    <c:if test="${sessionScope.curradmin.department.id > 1 }">
+	                    <li><a href="${contextPath}/pubFound.jsp">发布找到的</a></li>
+	                    <li><a href="${contextPath}/pubLost.jsp">发布丢失的</a></li>
+	                    <li><a href="${contextPath}/info/showInfoListByUser.jsp?uid=${sessionScope.curradmin.id}&status=-2">自己发布的找到信息</a></li>
+	                    <li><a href="${contextPath}/info/showInfoListByUser.jsp?uid=${sessionScope.curradmin.id}&status=2">自己发布的丢失信息</a></li>                   
+	                    </c:if>             
+	                    
+	                    <li><a href="${contextPath}/admin.html">退出</a></li>
 		            </c:when>  
 		            <c:otherwise>  
 				        <li><a href="${contextPath}/admin.html">管理员登陆</a></li>

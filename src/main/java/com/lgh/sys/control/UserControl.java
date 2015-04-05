@@ -83,8 +83,8 @@ public class UserControl implements com.opensymphony.xwork2.Action {
 	 * @throws Exception
 	 */
 	@Action(value = "logout", results = {
-			@Result(name = "success", location = "../login.html", type = "redirect"),
-			@Result(name = "error", location = "../login.html", type = "redirect")})
+			@Result(name = "success", location = "../index.jsp", type = "redirect"),
+			@Result(name = "error", location = "../index.jsp", type = "redirect")})
 	public String logout() throws Exception {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if( session != null){//根据用户名和密码和角色组合判断用户是否存在

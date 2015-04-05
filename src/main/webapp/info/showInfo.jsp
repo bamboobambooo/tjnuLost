@@ -93,7 +93,7 @@
 				<option value="-2" id="opfound">待物主领走</option>
 				<option value="0" id="opclose">已归还/已找到</option>
 			</select><br />
-			<div id="showImg">
+			<div id="showImg">图片：
 			 <c:if test='${info.imgurl !="" }'>
 			     <img src="${contextPath}/../infoimg/${info.imgurl}" alt="" style="width:100px;height:100px" />
 			 </c:if>

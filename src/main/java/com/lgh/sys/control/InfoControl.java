@@ -38,6 +38,8 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private File imgFile;
 	private String imgFileContentType; // 文件的内容类型  image/jpeg
 	private String imgFileFileName; // 上传文件名  比附abc.jpg
+	private Integer uid = 0;//User的id
+	private Integer aid = 0;//Admin的id
 
 
 	/**
@@ -129,6 +131,48 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据User或Admin的id查询信息列表
+	 * 需要uid/aid status (p size)
+	 * 以JSON格式返回查询到的Info List
+	 * @return
+	 */
+	@Action(value = "showInfoListByUser", results = {
+			@Result(name = "success", location = "showInfoListByUser.jsp"),
+			@Result(name = "error", location = "error.jsp") })
+	public String showInfoListByUser() {
+		try {
+			int fromIndex = (p-1) * size;
+			
+			Map<String, Object> condition = new HashMap<String, Object>();
+			if(uid != 0)condition.put("publishUser.id", uid);
+			if(aid != 0)condition.put("publishAdmin.id", aid);
+			condition.put("status", Short.parseShort(status));
+			List<Info> infos = infoService.findAllByPageAndOrder(Info.class, "id", "desc", fromIndex, size, condition);
+			BigInteger total = infoService.countAllByPageAndOrder(Info.class, "id", "desc", condition);
+			Integer pages ;
+			if(total.intValue() % size == 0){
+				pages = total.intValue()/size;
+			}else{
+				pages = total.intValue()/size+1;
+			}
+			
+			Map<String,Object> map = new HashMap<>();
+			map.put("result", infos);
+			map.put("total", total);
+			map.put("pages", pages);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), map);
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+			
+		}
+		return SUCCESS;
 	}
 	
 	@Action(value = "showInfo", results = {
@@ -227,6 +271,22 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 
 	public void setImgFileFileName(String imgFileFileName) {
 		this.imgFileFileName = imgFileFileName;
+	}
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public Integer getAid() {
+		return aid;
+	}
+
+	public void setAid(Integer aid) {
+		this.aid = aid;
 	}
 
 }

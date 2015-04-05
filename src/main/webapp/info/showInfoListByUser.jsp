@@ -16,13 +16,23 @@
 		<script src="${contextPath}/js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
 		<script>
 			jQuery(document).ready(function ($) {
+				
+				 var status = "";
+	             if(currUrlNoPage.indexOf("status=")>0){
+	            	 status = currUrlNoPage.substring(currUrlNoPage.indexOf("status=")+7, currUrlNoPage.length);
+	             }
+	             if(status == 2){
+	            	 $('.main h2').text("求助");
+	             }
 
 				$.ajax({
 					type:"post",
-					url:"./getFoundJSON",
+					url:"./showInfoListByUser",
 			        data:{
 			            p:currPage,
-			            size:10
+			            size:10,
+			            uid:5,
+			            status:+status
 			        },				
 					dataType:"json",
 					success:function(data){
@@ -105,7 +115,10 @@
                                 html += v.publishUser.name + "";
                             }
                             
-                            html += " 在 "+v.place+" 发现了 "+'<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
+                            html += " 在 "+v.place;
+                            if(status == 2){html +=" 丢失了 ";}
+                            else if(status == -2){html +=" 发现了 ";}
+                            html +='<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
                         });
 						html+="</ul>";
 						$('.main h2').after(html);
@@ -118,17 +131,7 @@
 	<body>
 		<div class="container">
             <%@ include file="/include/header.jsp" %>
-			<div class="leftnav">导航区域
-				<ul>
-					<li><a href="../register.html">用户注册</a></li>
-					<li><a href="../login.html">用户登陆</a></li>
-					<li><a href="../admin.html">管理员登陆</a></li>
-
-				</ul>
-
-
-
-			</div>
+			<%@ include file="/include/leftnav.jsp" %>
 			<div class="main">
 					<h2>认领</h2>
 			</div>
