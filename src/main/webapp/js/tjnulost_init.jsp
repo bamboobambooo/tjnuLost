@@ -93,5 +93,7 @@
 					window.location.href = "${contextPath}/index.jsp";
 				});
 				
+				$('#ume').css("min-height","210px");
+
 				
 			});

@@ -118,4 +118,10 @@
     text-align: center;
   }
 }
+.login .edui-container {
+  float: right;
+}
+.login .edui-container textarea.input-detail {
+  width: 100%;
+}
 /*# sourceMappingURL=login.css.map */

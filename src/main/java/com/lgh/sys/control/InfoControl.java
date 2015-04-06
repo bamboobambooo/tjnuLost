@@ -61,8 +61,12 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 				curradmin = (Admin) ServletActionContext.getRequest().getSession().getAttribute("curradmin");
 				info.setPublishAdmin(curradmin);
 			}
-			String imgURL = infoService.uploadImg(imgFile, imgFileFileName);
-			info.setImgurl(imgURL);
+			if(imgFile == null){
+				info.setImgurl("");
+			}else{
+				String imgURL = infoService.uploadImg(imgFile, imgFileFileName);
+				info.setImgurl(imgURL);
+			}
 			
 			infoService.save(info);
 		} catch (Exception e) {

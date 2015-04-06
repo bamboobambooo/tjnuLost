@@ -13,6 +13,10 @@
 		<script src="${contextPath}/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/less.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${contextPath}/js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="${contextPath}/js/umeditor/themes/default/css/umeditor.min.css"/>
+		<script src="${contextPath}/js/umeditor/umeditor.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${contextPath}/js/umeditor/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${contextPath}/js/umeditor/umeditor.config.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body class="login-page">
@@ -46,10 +50,32 @@
                             <span class="input-tip">物品</span>
                             <input class="input-text" placeholder="丢了什么东西" type="text" name="info.item" id="info.item" />
                         </label>
-						<label class="input-block input-detail">
+						<label class="input-block input-detail" id="ume">
 							<span class="input-tip">详情</span>
 							<!-- <input class="input-text" placeholder="找到了什么东西、样子……" type="text" name="info.detail" id="info.detail"/> -->
-                            <textarea class="input-text input-detail" placeholder="找到了什么东西、样子……" name="info.detail" id="info.detail"></textarea>
+                            <textarea class="input-text input-detail" placeholder="找到了什么东西、样子……" name="info.detail" id="infodetail"></textarea>
+							<!-- <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+                                                             详情
+	                        </script> -->
+	                        <script type="text/javascript">
+	                        	var um = UM.getEditor('infodetail',{initialFrameWidth :"70%"});
+	                        	jQuery(document).ready(function ($) {
+	                        		$(window).resize(function(){
+	                        			if(document.body.clientWidth<=639){
+	                        				$('div.edui-container').css("width","100%");
+	                        			}else{
+	                        				$('div.edui-container').css("width","70%");
+	                        			}
+	                        		});
+	                        		
+	                        		$("#subbtn").mousedown(function () {
+	                        			$('#infodetail').text(um.getContent());
+	                        			debugger;
+	                        		});
+	                        		
+	                        	});
+	                        </script>
+							
 						</label>
 							<input type="hidden" name="info.status" value="2">
 						<div class="input-block"><input id="subbtn" type="submit" class="subbtn" value="发布"/></div>

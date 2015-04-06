@@ -118,7 +118,7 @@
                             html += " 在 "+v.place;
                             if(status == 2){html +=" 丢失了 ";}
                             else if(status == -2){html +=" 发现了 ";}
-                            html +='<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
+                            html +='<a href="${contextPath}/info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
                         });
 						html+="</ul>";
 						$('.main h2').after(html);
