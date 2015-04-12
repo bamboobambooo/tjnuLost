@@ -3,6 +3,7 @@ package com.lgh.sys.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,10 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	private String imgFileFileName; // 上传文件名  比附abc.jpg
 	private Integer uid = 0;//User的id
 	private Integer aid = 0;//Admin的id
+	
+	private String search = "";//搜索的关键字
+	private String timeFrom = "";
+	private String timeTo = "";
 
 
 	/**
@@ -136,6 +141,38 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		}
 		return null;
 	}
+	
+	/**
+	 * 根据关键字search/状态status/时间time 搜索信息
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Action(value = "search")
+	public String search() {
+		try {
+			int fromIndex = (p-1) * size;
+			
+			
+			List<Info> infos = infoService.findInfoByWord(search, Short.valueOf(status), timeFrom, timeTo, "id", fromIndex, size);
+			BigInteger total = infoService.countInfoByWord(search, Short.valueOf(status), timeFrom, timeTo);
+			Integer pages ;
+			if(total.intValue() % size == 0){
+				pages = total.intValue()/size;
+			}else{
+				pages = total.intValue()/size+1;
+			}
+			
+			Map<String,Object> map = new HashMap<>();
+			map.put("result", infos);
+			map.put("total", total);
+			map.put("pages", pages);
+			JsonUtil.outToJson(ServletActionContext.getResponse(), map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
 	
 	/**
 	 * 根据User或Admin的id查询信息列表
@@ -291,6 +328,31 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 
 	public void setAid(Integer aid) {
 		this.aid = aid;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) throws UnsupportedEncodingException {
+		String tmp = new String(search.getBytes("ISO8859-1"),"UTF-8");
+		this.search = tmp;
+	}
+
+	public String getTimeFrom() {
+		return timeFrom;
+	}
+
+	public void setTimeFrom(String timeFrom) {
+		this.timeFrom = timeFrom;
+	}
+
+	public String getTimeTo() {
+		return timeTo;
+	}
+
+	public void setTimeTo(String timeTo) {
+		this.timeTo = timeTo;
 	}
 
 }

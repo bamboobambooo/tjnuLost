@@ -2,7 +2,9 @@ package com.lgh.sys.service;
 
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,33 @@ public class InfoService extends BaseService<Info> {
 	public List<Info> findInfoByPageAndStatus(short status,String orderPropertyName,int begin,int size){
 		return infoDao.findInfoByPageAndStatus(status,orderPropertyName,begin,size);
 	}
+	
+	/**
+	 * 根据搜索词来查询信息
+	 * @param search 搜索词
+	 * @param status 状态
+	 * @param timeFrom 起始时间
+	 * @param timeTo 截止时间
+	 * @param orderPropertyName 排序属性名  降序
+	 * @param begin 开始位置索引
+	 * @param size 结果条数
+	 * @return List<Info>
+	 */
+	public List<Info> findInfoByWord(String search,short status,String timeFrom,String timeTo,String orderPropertyName,int begin,int size){
+		return infoDao.findInfoByWord(search, status, timeFrom, timeTo, orderPropertyName, begin, size);
+	}
+	
+	/**
+	 * 根据搜索词来查询信息 的条数
+	 * @param search 搜索词
+	 * @param status 状态
+	 * @param timeFrom 起始时间
+	 * @param timeTo 截止时间
+	 * @return BigInteger
+	 */
+	public BigInteger countInfoByWord(String search, short status,String timeFrom, String timeTo) {
+		return infoDao.countInfoByWord(search, status, timeFrom, timeTo);
+	}	
 	
 	/**
 	 * 分页查询 丢失的信息
