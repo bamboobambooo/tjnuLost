@@ -142,11 +142,15 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 		return null;
 	}
 	
+	@Action(value="searchAction")
+	public String searchAction(){
+		return SUCCESS;
+	}
+	
 	/**
 	 * 根据关键字search/状态status/时间time 搜索信息
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Action(value = "search")
 	public String search() {
 		try {
@@ -335,8 +339,8 @@ public class InfoControl implements com.opensymphony.xwork2.Action {
 	}
 
 	public void setSearch(String search) throws UnsupportedEncodingException {
-		String tmp = new String(search.getBytes("ISO8859-1"),"UTF-8");
-		this.search = tmp;
+		//String tmp = new String(search.getBytes("ISO8859-1"),"UTF-8");
+		this.search = search;//tmp;
 	}
 
 	public String getTimeFrom() {

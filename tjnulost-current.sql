@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2015-04-04 16:26:15
+Date: 2015-04-15 01:12:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `t_admin` (
   PRIMARY KEY (`id`),
   KEY `fk_dep_id` (`dep_id`),
   CONSTRAINT `fk_dep_id` FOREIGN KEY (`dep_id`) REFERENCES `t_department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
@@ -38,7 +38,16 @@ CREATE TABLE `t_admin` (
 INSERT INTO `t_admin` VALUES ('1', 'admin', null, 'admin', '15936596555', 'hnnk@qq.com', '1');
 INSERT INTO `t_admin` VALUES ('7', 'uiq', null, 'uiq', '111', '111', '2');
 INSERT INTO `t_admin` VALUES ('9', '333', null, '333', '333', '333', '2');
-INSERT INTO `t_admin` VALUES ('10', '444', null, '444', '444', '444', '2');
+INSERT INTO `t_admin` VALUES ('10', '444', null, '444', '444', '10', '2');
+INSERT INTO `t_admin` VALUES ('12', 'nas', null, 'nas', '33', '10', '2');
+INSERT INTO `t_admin` VALUES ('13', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('14', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('15', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('16', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('17', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('18', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('19', 'a', null, null, null, null, '2');
+INSERT INTO `t_admin` VALUES ('20', 'a', null, null, null, null, '2');
 
 -- ----------------------------
 -- Table structure for t_department
@@ -83,7 +92,7 @@ CREATE TABLE `t_info` (
   `publish_admin_id` int(11) DEFAULT NULL,
   `publish_user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_info
@@ -107,6 +116,10 @@ INSERT INTO `t_info` VALUES ('16', '-2', '劝学楼', '钢笔', '1428135169158.n
 INSERT INTO `t_info` VALUES ('17', '-2', '图书馆', '书包', '1428135606775.image/jpeg', '绿色的', '2015-04-04 16:20:19', null, null, '5');
 INSERT INTO `t_info` VALUES ('18', '-2', '图书馆', '书包', '1428135654004.image/jpeg', '绿色的', '2015-04-04 16:21:05', null, null, '5');
 INSERT INTO `t_info` VALUES ('19', '-2', '兴文楼', '书包', '1428135909783.jpg', '蓝色的', '2015-04-04 16:25:09', null, null, '5');
+INSERT INTO `t_info` VALUES ('20', '-2', '劝学楼', '书包', '1428161556100.jpg', '蓝蓝的。。。', '2015-04-04 23:32:37', null, null, '5');
+INSERT INTO `t_info` VALUES ('21', '-2', '劝学楼', '书包', '1428161556100.jpg', '蓝蓝的。。。', '2015-04-05 22:44:30', '2015-04-05 22:45:10', null, '5');
+INSERT INTO `t_info` VALUES ('22', '2', 'weqqw', 'weqqw', '', '<p style=\"text-align: right;\">eqq<span style=\"text-decoration:underline;\">wwq</span></p>', '2015-04-07 00:58:39', null, null, '5');
+INSERT INTO `t_info` VALUES ('23', '-2', 'dasasa', 'adsadssad', '1428339770558.jpg', '<p>sa</p><hr/><p>s<span style=\"color:#c00000\">asas</span></p>', '2015-04-07 01:02:50', null, null, '5');
 
 -- ----------------------------
 -- Table structure for t_user
