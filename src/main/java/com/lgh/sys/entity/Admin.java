@@ -1,12 +1,14 @@
 package com.lgh.sys.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import com.lgh.common.entity.BaseEntity;
 
 @Entity
@@ -20,6 +22,15 @@ public class Admin extends BaseEntity implements Serializable {
 	private Department department;
 	
 	private String name;
+	private String realname;
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
 	private String password;
 	private String mobile;
 	private String email;

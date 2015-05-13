@@ -199,7 +199,7 @@ jQuery(document).ready(function($) {
 	        data:{
 	            'admin.name':$('#name').val(),
 	            'admin.realname':$('#realname').val(),
-	            'admin.password':$('#name').val(),
+	            'admin.password':$('#password').val(),
 	            'admin.mobile':$('#mobile').val(),
 	            'admin.email':$('#email').val(),
 	            'admin.department.id':deptId
