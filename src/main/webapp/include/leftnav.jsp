@@ -31,7 +31,7 @@
 	                    <li><a href="${contextPath}/info/showInfoListByUser.jsp?uid=${sessionScope.curradmin.id}&status=2">自己发布的丢失信息</a></li>                   
 	                    </c:if>             
 	                    
-	                    <li><a href="${contextPath}/admin.html">退出</a></li>
+	                   <li><a href="${contextPath}/user/logout">退出</a></li>
 		            </c:when>  
 		            <c:otherwise>  
 				        <li><a href="${contextPath}/admin.html">管理员登陆</a></li>

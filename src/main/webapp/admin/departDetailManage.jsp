@@ -143,7 +143,7 @@ jQuery(document).ready(function($) {
             	$('#editAdmin').addClass("hide");
             	$('#departAdminAdd').removeClass('show').addClass('hide');
             	$('#departNameChange').removeClass("hide").addClass("show");
-            	$('#departNameChange #deptname').val(data[0].department.name);
+            	$('#departNameChange #deptname').val(data.result[0].department.name);
             	$('#departNameChange #subbtn2').click(function(){
 	            	$.ajax({
 	                    type: "post",
