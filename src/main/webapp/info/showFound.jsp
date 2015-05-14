@@ -105,7 +105,7 @@
                                 html += v.publishUser.name + "";
                             }
                             
-                            html += " 在 "+v.place+" 发现了 "+'<a href="./info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
+                            html += " 在 "+v.place+" 发现了 "+'<a href="${contextPath}/info/showInfo?id='+v.id+'">'+ v.item+"</a></li>";
                         });
 						html+="</ul>";
 						$('.main h2').after(html);
