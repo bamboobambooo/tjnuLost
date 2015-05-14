@@ -24,7 +24,7 @@
                     url:"./search",
                     data:{
                     	p:${p},
-                        size:2,
+                        size:10,
                         search:"${search}"+"",
                         status:"${status}"+"",
                         timeFrom:"${timeFrom}"+"",

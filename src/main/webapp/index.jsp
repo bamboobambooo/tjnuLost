@@ -71,7 +71,7 @@
 					<h2><a href="./info/showLost.jsp">求助</a></h2>
 				</div>
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;LGH 版权所有</div>
 		</div>
 	</body>
 

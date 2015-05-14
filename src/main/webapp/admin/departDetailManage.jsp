@@ -340,7 +340,7 @@ cursor:pointer;
                     
         </div>        
 	</div>
-	<div class="footer">&copy;过客小站 版权所有</div>
+	<div class="footer">&copy;LGH 版权所有</div>
 </div>
 </body>
 

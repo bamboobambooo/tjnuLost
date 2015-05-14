@@ -49,7 +49,7 @@
 				欢迎管理员${curradmin.name }<br>
 				请从 导航区域 选择功能
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;LGH 版权所有</div>
 		</div>
 	</body>
 

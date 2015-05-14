@@ -46,7 +46,7 @@ if(session.getAttribute("curruser")==null){
 			<div class="main">
 				欢迎登陆个人中心！
 			</div>
-			<div class="footer">&copy;过客小站 版权所有</div>
+			<div class="footer">&copy;LGH 版权所有</div>
 		</div>
 	</body>
 
