@@ -16,10 +16,10 @@
 		<script src="${contextPath}/js/tjnulost_init.jsp" type="text/javascript" charset="utf-8"></script>
 		<script>
 			var curruid = 1;
-			<c:if test="${sessionScope.curradmin} != null">
+			<c:if test="${sessionScope.curradmin != null }">
 			curruid = ${sessionScope.curradmin.id};
 			</c:if>
-			<c:if test="${sessionScope.curruser} != null">
+			<c:if test="${sessionScope.curruser != null }">
 			curruid = ${sessionScope.curruser.id};
 			</c:if>
 			jQuery(document).ready(function ($) {
