@@ -18,6 +18,11 @@
 		<script type="text/javascript">
 			jQuery(document).ready(function ($) {
 				
+				$(".stime").each(function(){
+					var tmpTime = $(this).text().replace(".0","");
+					$(this).text(tmpTime);
+				});
+				
 				if(${info.status} == 2 ){
 					$('#oplost').attr("selected","selected");
 				}else if(${info.status} == -2){
@@ -93,11 +98,18 @@
 				<option value="-2" id="opfound">待物主领走</option>
 				<option value="0" id="opclose">已归还/已找到</option>
 			</select><br />
-			<div id="showImg">图片：
+			<c:if test='${info.updateTime !=null }'>
+			更新时间：<span class="stime">${info.updateTime}</span> <br/>
+			</c:if>
+			<c:if test='${info.updateTime == null }'>
+			发布时间：<span class="stime">${info.pubTime}</span><br/>
+			</c:if>
 			 <c:if test='${info.imgurl !="" }'>
+			 <div id="showImg">图片：
 			     <img src="${contextPath}/../infoimg/${info.imgurl}" alt="" style="width:100px;height:100px" />
+			     </div>
 			 </c:if>
-			</div>
+			
 			详情如下：<br/>
 			${info.detail }
 			</div>
